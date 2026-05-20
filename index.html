@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Silic — 3D Printing by Young Makers</title>
+    <meta name="description" content="Silic: We design, print, and ship 3D models made by young creators. Custom designs, quality prints, fast shipping.">
+    <meta property="og:title" content="Silic — 3D Printing by Young Makers">
+    <meta property="og:description" content="We design, print, and ship 3D models. Made by a team of young creators.">
+    <meta property="og:type" content="website">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #07070f;
+            --text: #f0f0f5;
+            --muted: #8a8a9a;
+            --accent: #ff6b35;
+            --accent-dark: #e55a2b;
+            --accent-light: #ff8c5a;
+            --glass: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --glass-hover: rgba(255, 255, 255, 0.08);
+            --glow: rgba(255, 107, 53, 0.15);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Inter, 'Helvetica Neue', sans-serif;
+            color: var(--text);
+            background: var(--bg);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        .nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            background: rgba(7, 7, 15, 0.7);
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 24px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        /* Hero */
+        .hero {
+            background: radial-gradient(ellipse 900px 900px at 20% 50%, rgba(255, 107, 53, 0.08) 0%, transparent 40%),
+                        radial-gradient(ellipse 600px 600px at 80% -20%, rgba(255, 140, 90, 0.06) 0%, transparent 35%),
+                        var(--bg);
+            padding: 96px 24px 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: radial-gradient(circle, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3.6rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            letter-spacing: -0.025em;
+            color: var(--text);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--muted);
+            margin-bottom: 32px;
+            line-height: 1.6;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 14px 28px;
+            border-radius: 28px;
+            border: none;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.08);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Section */
+        .section {
+            padding: 96px 24px;
+        }
+
+        .eyebrow {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .section h2 {
+            font-size: 2.6rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+        }
+
+        .section-lead {
+            font-size: 1.15rem;
+            color: var(--muted);
+            margin-bottom: 48px;
+            max-width: 600px;
+        }
+
+        /* What We Do */
+        .what-we-do {
+            background: var(--bg);
+        }
+
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 32px;
+            margin-top: 48px;
+        }
+
+        .process-card {
+            background: var(--glass);
+            padding: 40px 32px;
+            border-radius: 18px;
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .process-card:hover {
+            transform: translateY(-4px);
+            background: var(--glass-hover);
+            border-color: rgba(255, 107, 53, 0.3);
+            box-shadow: 0 20px 60px var(--glow);
+        }
+
+        .process-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+            color: var(--text);
+        }
+
+        .process-card p {
+            color: var(--muted);
+            line-height: 1.6;
+        }
+
+        .process-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            background: var(--accent);
+            color: white;
+            border-radius: 24px;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        /* Gallery */
+        .gallery {
+            margin-top: 48px;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 24px;
+        }
+
+        .gallery-card {
+            aspect-ratio: 1;
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.2) 0%, rgba(255, 140, 90, 0.15) 100%);
+            border: 1px solid rgba(255, 107, 53, 0.3);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+            text-align: center;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .gallery-card:hover {
+            transform: scale(1.02);
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.3) 0%, rgba(255, 140, 90, 0.25) 100%);
+            border-color: rgba(255, 107, 53, 0.6);
+            box-shadow: 0 20px 60px var(--glow);
+        }
+
+        /* Team */
+        .team {
+            background: var(--bg);
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 32px;
+            margin-top: 48px;
+        }
+
+        .team-member {
+            text-align: center;
+        }
+
+        .team-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(255, 140, 90, 0.25) 0%, rgba(255, 107, 53, 0.2) 100%);
+            border: 1px solid rgba(255, 107, 53, 0.3);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            margin: 0 auto 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 48px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+        }
+
+        .team-member:hover .team-avatar {
+            background: linear-gradient(135deg, rgba(255, 140, 90, 0.4) 0%, rgba(255, 107, 53, 0.35) 100%);
+            border-color: rgba(255, 107, 53, 0.6);
+            box-shadow: 0 15px 40px var(--glow);
+        }
+
+        .team-member h3 {
+            font-size: 1.1rem;
+            margin-bottom: 4px;
+        }
+
+        .team-member p {
+            font-size: 0.9rem;
+            color: var(--muted);
+        }
+
+        /* CTA Band */
+        .cta-band {
+            background: linear-gradient(180deg, rgba(255, 107, 53, 0.1) 0%, rgba(255, 107, 53, 0.05) 100%);
+            border-top: 2px solid rgba(255, 107, 53, 0.3);
+            border-bottom: 2px solid rgba(255, 107, 53, 0.3);
+            color: white;
+            padding: 80px 24px;
+            text-align: center;
+        }
+
+        .cta-band h2 {
+            color: white;
+            margin-bottom: 24px;
+            font-size: 2.2rem;
+        }
+
+        .cta-band p {
+            font-size: 1.1rem;
+            margin-bottom: 32px;
+            opacity: 0.95;
+        }
+
+        .cta-band .btn-secondary {
+            color: white;
+            border-color: rgba(255, 107, 53, 0.5);
+            background: rgba(255, 107, 53, 0.15);
+            backdrop-filter: blur(10px);
+        }
+
+        .cta-band .btn-secondary:hover {
+            background: rgba(255, 107, 53, 0.3);
+            border-color: rgba(255, 107, 53, 0.8);
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(7, 7, 15, 0.8);
+            padding: 48px 24px;
+            text-align: center;
+            color: var(--muted);
+            font-size: 14px;
+            border-top: 1px solid var(--glass-border);
+        }
+
+        /* Responsive */
+        @media (max-width: 860px) {
+            .hero h1 {
+                font-size: 2.4rem;
+            }
+
+            .section h2 {
+                font-size: 1.8rem;
+            }
+
+            .nav-links {
+                gap: 14px;
+            }
+
+            .process-grid,
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section {
+                padding: 80px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="/" class="logo">⚙️ Silic</a>
+            <ul class="nav-links">
+                <li><a href="#what">What We Do</a></li>
+                <li><a href="#team">Team</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>3D Printing Made by Young Creators</h1>
+            <p>We design, print, and ship custom 3D models. Every piece is crafted with care and shipped fast.</p>
+            <div class="hero-cta">
+                <a href="#what" class="btn btn-primary">See What We Make</a>
+                <a href="#contact" class="btn btn-secondary">Get in Touch</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- What We Do -->
+    <section class="what-we-do section" id="what">
+        <div class="container">
+            <div class="eyebrow">Our Process</div>
+            <h2>Design → Print → Ship</h2>
+            <p class="section-lead">We handle every step. From custom designs to quality prints, we get your 3D models right into your hands.</p>
+
+            <div class="process-grid">
+                <div class="process-card">
+                    <div class="process-number">1</div>
+                    <h3>Design</h3>
+                    <p>We create or modify 3D models to your exact specifications. Custom designs welcome.</p>
+                </div>
+                <div class="process-card">
+                    <div class="process-number">2</div>
+                    <h3>Print</h3>
+                    <p>High-quality 3D printing with precision and attention to detail in every layer.</p>
+                </div>
+                <div class="process-card">
+                    <div class="process-number">3</div>
+                    <h3>Ship</h3>
+                    <p>Fast, reliable shipping via UPS. Your prints arrive safe and on time.</p>
+                </div>
+            </div>
+
+            <div class="gallery">
+                <h3 style="margin-bottom: 24px; font-size: 1.4rem;">Recent Prints</h3>
+                <div class="gallery-grid">
+                    <div class="gallery-card">Articulated Dragon</div>
+                    <div class="gallery-card">Desk Organizer</div>
+                    <div class="gallery-card">Phone Stand</div>
+                    <div class="gallery-card">Miniature Figures</div>
+                    <div class="gallery-card">Custom Puzzles</div>
+                    <div class="gallery-card">More Coming Soon</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team -->
+    <section class="team section" id="team">
+        <div class="container">
+            <div class="eyebrow">Our Crew</div>
+            <h2>5 Young Makers</h2>
+            <p class="section-lead">Silic is run by a team of young creators passionate about 3D printing and making cool things.</p>
+
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="team-avatar">👨‍💻</div>
+                    <h3>Founder</h3>
+                    <p>Age 12 | Designer & Visionary</p>
+                </div>
+                <div class="team-member">
+                    <div class="team-avatar">🎨</div>
+                    <h3>Designer</h3>
+                    <p>3D Modeling Expert</p>
+                </div>
+                <div class="team-member">
+                    <div class="team-avatar">⚙️</div>
+                    <h3>Printer Master</h3>
+                    <p>Print Quality & Production</p>
+                </div>
+                <div class="team-member">
+                    <div class="team-avatar">📦</div>
+                    <h3>Logistics</h3>
+                    <p>Shipping & Fulfillment</p>
+                </div>
+                <div class="team-member">
+                    <div class="team-avatar">🚀</div>
+                    <h3>Growth</h3>
+                    <p>New Ideas & Expansion</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Band -->
+    <section class="cta-band" id="contact">
+        <div class="container">
+            <h2>Want Something Printed?</h2>
+            <p>Custom orders, bulk prints, or just a question — we'd love to help.</p>
+            <a href="mailto:hello@silic.com" class="btn btn-secondary">Get in Touch</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Silic. Made by young creators. Printed with ❤️ and shipped via UPS.</p>
+    </footer>
+
+    <!-- Analytics -->
+    <script>
+        (async () => {
+            const API = 'https://mhnvnh6pr6.execute-api.us-east-1.amazonaws.com';
+            const key = 'visitLogged:' + location.pathname;
+            if (sessionStorage.getItem(key)) return;
+            sessionStorage.setItem(key, '1');
+            try {
+                const { ip } = await (await fetch('https://api.ipify.org?format=json')).json();
+                await fetch(API + '/log-access', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        ip,
+                        success: true,
+                        userAgent: navigator.userAgent + ' | path=' + location.pathname
+                    })
+                });
+            } catch (_) { /* analytics best-effort */ }
+        })();
+    </script>
+</body>
+</html>
