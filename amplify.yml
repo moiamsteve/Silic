@@ -9,3 +9,10 @@ frontend:
       - '**/*'
   cache:
     paths: []
+  routing:
+    - source: '/products'
+      target: '/products.html'
+      status: '200'
+    - source: '</^[^.]+$|\.(?!.*\.)>'
+      target: '/index.html'
+      status: '200'
