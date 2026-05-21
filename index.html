@@ -22,10 +22,17 @@
             --accent: #ff6b35;
             --accent-dark: #e55a2b;
             --accent-light: #ff8c5a;
-            --glass: rgba(255, 255, 255, 0.05);
-            --glass-border: rgba(255, 255, 255, 0.1);
-            --glass-hover: rgba(255, 255, 255, 0.08);
+            --glass: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --glass-hover: rgba(255, 255, 255, 0.06);
             --glow: rgba(255, 107, 53, 0.15);
+        }
+
+        @keyframes rgb-shift {
+            0% { border-color: rgba(255, 107, 53, 0.4); }
+            33% { border-color: rgba(100, 200, 255, 0.4); }
+            66% { border-color: rgba(200, 100, 255, 0.4); }
+            100% { border-color: rgba(255, 107, 53, 0.4); }
         }
 
         body {
@@ -72,7 +79,7 @@
             color: var(--text);
             text-decoration: none;
             font-size: 14px;
-            transition: color 0.2s ease;
+            transition: color 0.3s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
         .nav-links a:hover {
@@ -137,9 +144,10 @@
             font-size: 14px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
             text-decoration: none;
             display: inline-block;
+            transform: translateZ(0);
         }
 
         .btn-primary {
@@ -218,7 +226,8 @@
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             text-align: center;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            transform: translateZ(0);
         }
 
         .process-card:hover {
@@ -266,8 +275,8 @@
 
         .gallery-card {
             aspect-ratio: 1;
-            background: linear-gradient(135deg, rgba(255, 107, 53, 0.2) 0%, rgba(255, 140, 90, 0.15) 100%);
-            border: 1px solid rgba(255, 107, 53, 0.3);
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.15) 0%, rgba(255, 140, 90, 0.1) 100%);
+            border: 1px solid rgba(255, 107, 53, 0.25);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border-radius: 18px;
@@ -280,7 +289,8 @@
             text-align: center;
             padding: 20px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            transform: translateZ(0);
         }
 
         .gallery-card:hover {
@@ -310,8 +320,8 @@
             width: 120px;
             height: 120px;
             border-radius: 50%;
-            background: linear-gradient(135deg, rgba(255, 140, 90, 0.25) 0%, rgba(255, 107, 53, 0.2) 100%);
-            border: 1px solid rgba(255, 107, 53, 0.3);
+            background: linear-gradient(135deg, rgba(255, 140, 90, 0.15) 0%, rgba(255, 107, 53, 0.12) 100%);
+            border: 1px solid rgba(255, 107, 53, 0.2);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             margin: 0 auto 16px;
@@ -321,7 +331,8 @@
             color: white;
             font-size: 48px;
             font-weight: 700;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            transform: translateZ(0);
         }
 
         .team-member:hover .team-avatar {
@@ -338,6 +349,162 @@
         .team-member p {
             font-size: 0.9rem;
             color: var(--muted);
+        }
+
+        /* Products Section */
+        .products {
+            background: var(--bg);
+        }
+
+        .product-category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-bottom: 64px;
+        }
+
+        .product-category-card {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 18px;
+            padding: 32px 24px;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            transform: translateZ(0);
+            cursor: pointer;
+        }
+
+        .product-category-card:hover {
+            background: var(--glass-hover);
+            border-color: rgba(255, 107, 53, 0.3);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 60px var(--glow);
+        }
+
+        .product-icon {
+            font-size: 3rem;
+            margin-bottom: 12px;
+        }
+
+        .product-category-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 8px;
+            color: var(--text);
+        }
+
+        .product-category-card p {
+            font-size: 0.95rem;
+            color: var(--muted);
+            margin-bottom: 16px;
+        }
+
+        .product-pills {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .pill {
+            font-size: 0.8rem;
+            background: rgba(255, 107, 53, 0.15);
+            border: 1px solid rgba(255, 107, 53, 0.3);
+            color: var(--accent-light);
+            padding: 4px 12px;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            display: inline-block;
+        }
+
+        .case-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+        }
+
+        .case-card {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 16px;
+            padding: 24px;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            transform: translateZ(0);
+        }
+
+        .case-card:hover {
+            background: var(--glass-hover);
+            border-color: rgba(255, 107, 53, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 45px var(--glow);
+        }
+
+        .case-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+            gap: 12px;
+        }
+
+        .case-header h3 {
+            font-size: 1.2rem;
+            color: var(--text);
+            margin: 0;
+        }
+
+        .case-badges {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
+        .badge {
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            border: 1px solid;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .badge-flex {
+            background: rgba(255, 107, 53, 0.15);
+            border-color: rgba(255, 107, 53, 0.4);
+            color: var(--accent-light);
+        }
+
+        .badge-hard {
+            background: rgba(100, 180, 255, 0.1);
+            border-color: rgba(100, 180, 255, 0.3);
+            color: rgb(150, 200, 255);
+        }
+
+        .badge-rgb {
+            background: rgba(255, 107, 53, 0.12);
+            border-color: rgba(255, 107, 53, 0.3);
+            background: linear-gradient(135deg, rgba(255, 100, 80, 0.12), rgba(80, 150, 255, 0.12));
+            color: var(--accent-light);
+            animation: rgb-shift 3s ease-in-out infinite;
+        }
+
+        .badge-custom {
+            background: rgba(180, 100, 255, 0.1);
+            border-color: rgba(180, 100, 255, 0.3);
+            color: rgb(200, 150, 255);
+        }
+
+        .case-card p {
+            font-size: 0.9rem;
+            color: var(--muted);
+            line-height: 1.5;
+            margin: 0;
         }
 
         /* CTA Band */
@@ -399,12 +566,23 @@
             }
 
             .process-grid,
-            .team-grid {
+            .team-grid,
+            .product-category-grid,
+            .case-grid {
                 grid-template-columns: 1fr;
             }
 
             .section {
                 padding: 80px 20px;
+            }
+
+            .case-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .case-badges {
+                justify-content: flex-start;
             }
         }
     </style>
@@ -413,9 +591,9 @@
     <!-- Navigation -->
     <nav class="nav">
         <div class="nav-inner">
-            <a href="/" class="logo">⚙️ Silic</a>
+            <a href="/" class="logo">Silic</a>
             <ul class="nav-links">
-                <li><a href="#what">What We Do</a></li>
+                <li><a href="#products">Products</a></li>
                 <li><a href="#team">Team</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
@@ -428,46 +606,91 @@
             <h1>3D Printing Made by Young Creators</h1>
             <p>We design, print, and ship custom 3D models. Every piece is crafted with care and shipped fast.</p>
             <div class="hero-cta">
-                <a href="#what" class="btn btn-primary">See What We Make</a>
+                <a href="#products" class="btn btn-primary">See What We Make</a>
                 <a href="#contact" class="btn btn-secondary">Get in Touch</a>
             </div>
         </div>
     </section>
 
-    <!-- What We Do -->
-    <section class="what-we-do section" id="what">
+    <!-- Products -->
+    <section class="products section" id="products">
         <div class="container">
-            <div class="eyebrow">Our Process</div>
-            <h2>Design → Print → Ship</h2>
-            <p class="section-lead">We handle every step. From custom designs to quality prints, we get your 3D models right into your hands.</p>
+            <div class="eyebrow">What We Make</div>
+            <h2>Built to Impress</h2>
+            <p class="section-lead">Custom designs, precision prints, shipped via UPS. Fidgets, phone cases, and smartwatch cases engineered for quality.</p>
 
-            <div class="process-grid">
-                <div class="process-card">
-                    <div class="process-number">1</div>
-                    <h3>Design</h3>
-                    <p>We create or modify 3D models to your exact specifications. Custom designs welcome.</p>
+            <div class="product-category-grid">
+                <div class="product-category-card">
+                    <div class="product-icon">🎮</div>
+                    <h3>Fidgets</h3>
+                    <p>Smooth, satisfying 3D printed fidget toys designed to soothe and entertain.</p>
+                    <div class="product-pills">
+                        <span class="pill">Custom Designs</span>
+                    </div>
                 </div>
-                <div class="process-card">
-                    <div class="process-number">2</div>
-                    <h3>Print</h3>
-                    <p>High-quality 3D printing with precision and attention to detail in every layer.</p>
+
+                <div class="product-category-card">
+                    <div class="product-icon">📱</div>
+                    <h3>iPhone Cases</h3>
+                    <p>4 styles: Flex, Hard, Custom art, and Pro with RGB. Built tough, designed sleek.</p>
+                    <div class="product-pills">
+                        <span class="pill">4 Variants</span>
+                    </div>
                 </div>
-                <div class="process-card">
-                    <div class="process-number">3</div>
-                    <h3>Ship</h3>
-                    <p>Fast, reliable shipping via UPS. Your prints arrive safe and on time.</p>
+
+                <div class="product-category-card">
+                    <div class="product-icon">⌚</div>
+                    <h3>Apple Watch Cases</h3>
+                    <p>Premium protective cases for Apple Watch. Precision fit, premium materials.</p>
+                    <div class="product-pills">
+                        <span class="pill">Custom Fit</span>
+                    </div>
                 </div>
             </div>
 
-            <div class="gallery">
-                <h3 style="margin-bottom: 24px; font-size: 1.4rem;">Recent Prints</h3>
-                <div class="gallery-grid">
-                    <div class="gallery-card">Articulated Dragon</div>
-                    <div class="gallery-card">Desk Organizer</div>
-                    <div class="gallery-card">Phone Stand</div>
-                    <div class="gallery-card">Miniature Figures</div>
-                    <div class="gallery-card">Custom Puzzles</div>
-                    <div class="gallery-card">More Coming Soon</div>
+            <div id="iphone-cases" style="margin-top: 48px;">
+                <h3 style="margin-bottom: 24px; font-size: 1.4rem; color: var(--text);">iPhone Case Variants</h3>
+                <div class="case-grid">
+                    <div class="case-card">
+                        <div class="case-header">
+                            <h3>TPU Flex</h3>
+                            <div class="case-badges">
+                                <span class="badge badge-flex">Flexible</span>
+                            </div>
+                        </div>
+                        <p>Soft, flexible 3D printed TPU case. Absorbs impact. Easy on, easy off.</p>
+                    </div>
+
+                    <div class="case-card">
+                        <div class="case-header">
+                            <h3>Hard Case</h3>
+                            <div class="case-badges">
+                                <span class="badge badge-hard">Hard Shell</span>
+                            </div>
+                        </div>
+                        <p>Rigid protective shell. Maximum durability. Sleek, slim design.</p>
+                    </div>
+
+                    <div class="case-card">
+                        <div class="case-header">
+                            <h3>Custom Case</h3>
+                            <div class="case-badges">
+                                <span class="badge badge-custom">Custom · Blaire</span>
+                            </div>
+                        </div>
+                        <p>Unique design hand-drawn by Blaire. One-of-a-kind art. Your style.</p>
+                    </div>
+
+                    <div class="case-card">
+                        <div class="case-header">
+                            <h3>Case Pro</h3>
+                            <div class="case-badges">
+                                <span class="badge badge-rgb">RGB</span>
+                                <span class="badge badge-hard">Hard Shell</span>
+                            </div>
+                        </div>
+                        <p>Premium case with integrated RGB fan. Cooling + protection. The ultimate.</p>
+                    </div>
                 </div>
             </div>
         </div>
