@@ -394,7 +394,6 @@
             border-radius: 50%;
             pointer-events: none;
             z-index: 3;
-            transform: translate(-50%, -50%);
         }
 
         .watch-card .ripple-circle {
@@ -725,13 +724,11 @@
 
             const circle = document.createElement('div');
             circle.classList.add('ripple-circle');
-            circle.style.left = x + 'px';
-            circle.style.top = y + 'px';
             card.appendChild(circle);
 
             circle.animate([
-                { width: '0px', height: '0px', opacity: 1, borderWidth: '2.5px' },
-                { width: (maxRadius * 2) + 'px', height: (maxRadius * 2) + 'px', opacity: 0, borderWidth: '1px' }
+                { left: x + 'px', top: y + 'px', width: '0px', height: '0px', opacity: 1, borderWidth: '2.5px' },
+                { left: (x - maxRadius) + 'px', top: (y - maxRadius) + 'px', width: (maxRadius * 2) + 'px', height: (maxRadius * 2) + 'px', opacity: 0, borderWidth: '1px' }
             ], { duration: 1400, easing: 'cubic-bezier(0.23, 1, 0.32, 1)' }).onfinish = () => circle.remove();
 
             card.classList.toggle('active');
