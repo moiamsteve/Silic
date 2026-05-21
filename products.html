@@ -401,8 +401,17 @@
             100% { border-color: var(--glass-border);     box-shadow: inset 0 2px 4px rgba(255,255,255,0.15), inset 0 -2px 4px rgba(0,0,0,0.2), 0 20px 40px rgba(0,0,0,0.2); }
         }
 
+        @keyframes edge-flash-white {
+            0%   { border-color: rgba(255, 255, 255, 0.9); box-shadow: inset 0 2px 4px rgba(255,255,255,0.15), inset 0 -2px 4px rgba(0,0,0,0.2), 0 0 28px rgba(255, 255, 255, 0.5); }
+            100% { border-color: var(--glass-border);      box-shadow: inset 0 2px 4px rgba(255,255,255,0.15), inset 0 -2px 4px rgba(0,0,0,0.2), 0 20px 40px rgba(0,0,0,0.2); }
+        }
+
         .case-card.edge-hit {
             animation: edge-flash 0.8s ease-out forwards;
+        }
+
+        .case-card.edge-hit-white {
+            animation: edge-flash-white 0.8s ease-out forwards;
         }
 
         /* Footer */
@@ -562,6 +571,50 @@
         </div>
     </section>
 
+    <!-- Apple Watch Cases -->
+    <section class="products section">
+        <div class="container">
+            <div class="eyebrow">Wearable Protection</div>
+            <h2>Apple Watch Cases</h2>
+            <p class="section-lead">Precision-fit protection for your Apple Watch. Choose Flex or Hard shell, with optional engraving.</p>
+
+            <div id="watch-cases" style="margin-top: 48px;">
+                <h3 style="margin-bottom: 24px; font-size: 1.4rem; color: var(--text);">Watch Case Options</h3>
+                <div class="case-grid">
+                    <div class="case-card watch-card" onclick="toggleCardWithRipple(event, true)">
+                        <div class="case-content">
+                            <div class="case-header">
+                                <h3>TPU Flex</h3>
+                                <div class="case-badges">
+                                    <span class="badge badge-flex">Flexible</span>
+                                </div>
+                            </div>
+                            <p class="case-brief-text">Soft, flexible protection. Comfortable all-day wear. + Engraving $1</p>
+                        </div>
+                        <div class="case-description-overlay">
+                            <p class="case-description-text">Soft TPU band hugs your wrist comfortably. Flexible material absorbs impacts. Available in multiple colors. Optional laser engraving on the back for personalization. Perfect for active wear and everyday use.</p>
+                        </div>
+                    </div>
+
+                    <div class="case-card watch-card" onclick="toggleCardWithRipple(event, true)">
+                        <div class="case-content">
+                            <div class="case-header">
+                                <h3>Hard Case</h3>
+                                <div class="case-badges">
+                                    <span class="badge badge-hard">Hard Shell</span>
+                                </div>
+                            </div>
+                            <p class="case-brief-text">Rigid protective shell. Maximum durability. + Engraving $1</p>
+                        </div>
+                        <div class="case-description-overlay">
+                            <p class="case-description-text">Premium hard polycarbonate shell for maximum protection. Sleek, slim design won't bulk up your wrist. Precision-fit for all Apple Watch sizes. Optional laser engraving on the back adds a personal touch. Built to last.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer>
         <p>&copy; 2026 Silic. Made by young creators. Printed with ❤️ and shipped via UPS.</p>
@@ -577,7 +630,7 @@
 
         const edgeTimers = new WeakMap();
 
-        function toggleCardWithRipple(event) {
+        function toggleCardWithRipple(event, useWhiteFlash = false) {
             const card = event.currentTarget;
             const rect = card.getBoundingClientRect();
             const x = event.clientX - rect.left;
@@ -586,6 +639,7 @@
             document.querySelectorAll('.case-card').forEach(c => {
                 if (c !== card && c.classList.contains('active')) {
                     c.classList.remove('active');
+                    c.classList.remove('edge-hit', 'edge-hit-white');
                     clearTimeout(edgeTimers.get(c));
                 }
             });
@@ -615,13 +669,15 @@
             card.classList.toggle('active');
 
             if (card.classList.contains('active')) {
+                const flashClass = useWhiteFlash ? 'edge-hit-white' : 'edge-hit';
                 const t = setTimeout(() => {
-                    card.classList.add('edge-hit');
-                    card.addEventListener('animationend', () => card.classList.remove('edge-hit'), { once: true });
+                    card.classList.add(flashClass);
+                    card.addEventListener('animationend', () => card.classList.remove(flashClass), { once: true });
                 }, 800);
                 edgeTimers.set(card, t);
             } else {
                 clearTimeout(edgeTimers.get(card));
+                card.classList.remove('edge-hit', 'edge-hit-white');
             }
         }
 
