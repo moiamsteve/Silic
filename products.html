@@ -393,19 +393,7 @@
             border-radius: 50%;
             pointer-events: none;
             z-index: 3;
-            transform-origin: center center;
-            animation: ripple-scale 1.4s cubic-bezier(0.23, 1, 0.32, 1) forwards;
-        }
-
-        @keyframes ripple-scale {
-            0% {
-                transform: scale(0);
-                opacity: 1;
-            }
-            100% {
-                transform: scale(1);
-                opacity: 0;
-            }
+            transform: translate(-50%, -50%);
         }
 
         .watch-card .ripple-circle {
@@ -709,8 +697,11 @@
         function toggleCardWithRipple(event, flashColor = null) {
             const card = event.currentTarget;
             const rect = card.getBoundingClientRect();
-            const x = event.clientX - rect.left;
-            const y = event.clientY - rect.top;
+            const cardStyle = window.getComputedStyle(card);
+            const borderLeft = parseFloat(cardStyle.borderLeftWidth) || 0;
+            const borderTop = parseFloat(cardStyle.borderTopWidth) || 0;
+            const x = event.clientX - rect.left - borderLeft;
+            const y = event.clientY - rect.top - borderTop;
 
             document.querySelectorAll('.case-card').forEach(c => {
                 if (c !== card && c.classList.contains('active')) {
@@ -727,19 +718,20 @@
                 Math.sqrt((rect.width - x) ** 2 + (rect.height - y) ** 2)
             ) + 10;
 
-            card.style.setProperty('--ripple-x', ((x / rect.width) * 100) + '%');
-            card.style.setProperty('--ripple-y', ((y / rect.height) * 100) + '%');
+            card.style.setProperty('--ripple-x', x + 'px');
+            card.style.setProperty('--ripple-y', y + 'px');
             card.style.setProperty('--ripple-radius', maxRadius + 'px');
 
             const circle = document.createElement('div');
             circle.classList.add('ripple-circle');
-            circle.style.left = (x - maxRadius) + 'px';
-            circle.style.top = (y - maxRadius) + 'px';
-            circle.style.width = (maxRadius * 2) + 'px';
-            circle.style.height = (maxRadius * 2) + 'px';
+            circle.style.left = x + 'px';
+            circle.style.top = y + 'px';
             card.appendChild(circle);
 
-            circle.addEventListener('animationend', () => circle.remove(), { once: true });
+            circle.animate([
+                { width: '0px', height: '0px', opacity: 1, borderWidth: '2.5px' },
+                { width: (maxRadius * 2) + 'px', height: (maxRadius * 2) + 'px', opacity: 0, borderWidth: '1px' }
+            ], { duration: 1400, easing: 'cubic-bezier(0.23, 1, 0.32, 1)' }).onfinish = () => circle.remove();
 
             card.classList.toggle('active');
 
