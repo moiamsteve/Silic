@@ -336,6 +336,44 @@
             border-color: rgba(255, 255, 255, 0.28);
         }
 
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(200, 220, 255, 0.4) 0%, rgba(200, 220, 255, 0.2) 50%, transparent 70%);
+            pointer-events: none;
+            transform: scale(0);
+        }
+
+        .case-card {
+            position: relative;
+        }
+
+        .case-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .case-description-text {
+            opacity: 0;
+            transition: opacity 0.6s ease;
+            pointer-events: none;
+        }
+
+        .case-card.active .case-description-text {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .case-brief-text {
+            opacity: 1;
+            transition: opacity 0.6s ease;
+        }
+
+        .case-card.active .case-brief-text {
+            opacity: 0;
+            pointer-events: none;
+        }
+
         /* Footer */
         footer {
             background: rgba(7, 7, 15, 0.8);
@@ -411,7 +449,7 @@
                     <h3>iPhone Cases</h3>
                     <p>4 styles: Flex, Hard, Custom art, and Pro with RGB. Built tough, designed sleek.</p>
                     <div class="product-pills">
-                        <span class="pill">4 Variants</span>
+                        <span class="pill" onclick="scrollToVariants(event)">4 Variants</span>
                     </div>
                 </div>
 
@@ -428,56 +466,56 @@
             <div id="iphone-cases" style="margin-top: 48px;">
                 <h3 style="margin-bottom: 24px; font-size: 1.4rem; color: var(--text);">iPhone Case Variants</h3>
                 <div class="case-grid">
-                    <div class="case-card" onclick="toggleCard(this)">
-                        <div class="case-header">
-                            <h3>TPU Flex</h3>
-                            <div class="case-badges">
-                                <span class="badge badge-flex">Flexible</span>
+                    <div class="case-card" onclick="toggleCardWithRipple(event)">
+                        <div class="case-content">
+                            <div class="case-header">
+                                <h3>TPU Flex</h3>
+                                <div class="case-badges">
+                                    <span class="badge badge-flex">Flexible</span>
+                                </div>
                             </div>
-                        </div>
-                        <p>Soft, flexible 3D printed TPU case. Absorbs impact. Easy on, easy off.</p>
-                        <div class="case-description">
-                            Perfect for those who want maximum flexibility and impact absorption. The TPU material is soft to the touch while providing excellent protection. Fits snugly without adding bulk. Easy to install and remove. Available in multiple colors.
+                            <p class="case-brief-text">Soft, flexible 3D printed TPU case. Absorbs impact. Easy on, easy off.</p>
+                            <p class="case-description-text">Perfect for those who want maximum flexibility and impact absorption. The TPU material is soft to the touch while providing excellent protection. Fits snugly without adding bulk. Easy to install and remove. Available in multiple colors.</p>
                         </div>
                     </div>
 
-                    <div class="case-card" onclick="toggleCard(this)">
-                        <div class="case-header">
-                            <h3>Hard Case</h3>
-                            <div class="case-badges">
-                                <span class="badge badge-hard">Hard Shell</span>
+                    <div class="case-card" onclick="toggleCardWithRipple(event)">
+                        <div class="case-content">
+                            <div class="case-header">
+                                <h3>Hard Case</h3>
+                                <div class="case-badges">
+                                    <span class="badge badge-hard">Hard Shell</span>
+                                </div>
                             </div>
-                        </div>
-                        <p>Rigid protective shell. Maximum durability. Sleek, slim design.</p>
-                        <div class="case-description">
-                            Premium hard polycarbonate shell provides maximum protection against drops and impacts. Ultra-slim profile keeps your phone feeling lightweight. Raised edges protect screen and camera. Precision-cut for perfect fit and easy access to all ports and buttons.
+                            <p class="case-brief-text">Rigid protective shell. Maximum durability. Sleek, slim design.</p>
+                            <p class="case-description-text">Premium hard polycarbonate shell provides maximum protection against drops and impacts. Ultra-slim profile keeps your phone feeling lightweight. Raised edges protect screen and camera. Precision-cut for perfect fit and easy access to all ports and buttons.</p>
                         </div>
                     </div>
 
-                    <div class="case-card" onclick="toggleCard(this)">
-                        <div class="case-header">
-                            <h3>Custom Case</h3>
-                            <div class="case-badges">
-                                <span class="badge badge-custom">Custom · Blaire</span>
+                    <div class="case-card" onclick="toggleCardWithRipple(event)">
+                        <div class="case-content">
+                            <div class="case-header">
+                                <h3>Custom Case</h3>
+                                <div class="case-badges">
+                                    <span class="badge badge-custom">Custom · Blaire</span>
+                                </div>
                             </div>
-                        </div>
-                        <p>Unique design hand-drawn by Blaire. One-of-a-kind art. Your style.</p>
-                        <div class="case-description">
-                            Each custom case is hand-designed and illustrated by Blaire. Combine hard shell durability with artistic custom designs. Express your unique personality with original artwork. Every case is one-of-a-kind and made just for you. Perfect as a gift or personal statement.
+                            <p class="case-brief-text">Unique design hand-drawn by Blaire. One-of-a-kind art. Your style.</p>
+                            <p class="case-description-text">Each custom case is hand-designed and illustrated by Blaire. Combine hard shell durability with artistic custom designs. Express your unique personality with original artwork. Every case is one-of-a-kind and made just for you. Perfect as a gift or personal statement.</p>
                         </div>
                     </div>
 
-                    <div class="case-card" onclick="toggleCard(this)">
-                        <div class="case-header">
-                            <h3>Case Pro</h3>
-                            <div class="case-badges">
-                                <span class="badge badge-rgb">RGB</span>
-                                <span class="badge badge-hard">Hard Shell</span>
+                    <div class="case-card" onclick="toggleCardWithRipple(event)">
+                        <div class="case-content">
+                            <div class="case-header">
+                                <h3>Case Pro</h3>
+                                <div class="case-badges">
+                                    <span class="badge badge-rgb">RGB</span>
+                                    <span class="badge badge-hard">Hard Shell</span>
+                                </div>
                             </div>
-                        </div>
-                        <p>Premium case with integrated RGB fan. Cooling + protection. The ultimate.</p>
-                        <div class="case-description">
-                            The ultimate flagship case combines hard shell protection with an integrated RGB cooling fan. Active heat dissipation keeps your phone cool during intensive use. Customizable RGB lighting syncs with your phone. Premium materials and precision engineering throughout. For those who demand the best.
+                            <p class="case-brief-text">Premium case with integrated RGB fan. Cooling + protection. The ultimate.</p>
+                            <p class="case-description-text">The ultimate flagship case combines hard shell protection with an integrated RGB cooling fan. Active heat dissipation keeps your phone cool during intensive use. Customizable RGB lighting syncs with your phone. Premium materials and precision engineering throughout. For those who demand the best.</p>
                         </div>
                     </div>
                 </div>
@@ -492,14 +530,48 @@
 
     <!-- Analytics -->
     <script>
-        function toggleCard(element) {
-            const cards = document.querySelectorAll('.case-card');
-            cards.forEach(card => {
-                if (card !== element) {
-                    card.classList.remove('active');
+        function scrollToVariants(event) {
+            event.stopPropagation();
+            const section = document.getElementById('iphone-cases');
+            section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        function toggleCardWithRipple(event) {
+            const card = event.currentTarget;
+            const rect = card.getBoundingClientRect();
+            const x = event.clientX - rect.left;
+            const y = event.clientY - rect.top;
+
+            const ripple = document.createElement('div');
+            ripple.classList.add('ripple');
+            ripple.style.left = x + 'px';
+            ripple.style.top = y + 'px';
+            ripple.style.width = '0px';
+            ripple.style.height = '0px';
+
+            card.appendChild(ripple);
+
+            const maxDim = Math.max(rect.width, rect.height);
+            const animation = ripple.animate([
+                { transform: 'scale(0)', opacity: 0.8 },
+                { transform: `scale(${maxDim * 2})`, opacity: 0 }
+            ], {
+                duration: 600,
+                easing: 'ease-out'
+            });
+
+            animation.onfinish = () => {
+                ripple.remove();
+            };
+
+            const otherCards = document.querySelectorAll('.case-card');
+            otherCards.forEach(c => {
+                if (c !== card) {
+                    c.classList.remove('active');
                 }
             });
-            element.classList.toggle('active');
+
+            card.classList.toggle('active');
         }
 
         (async () => {
