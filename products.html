@@ -400,6 +400,10 @@
             border-color: rgba(255, 255, 255, 0.8);
         }
 
+        .fidget-card .ripple-circle {
+            border-color: rgba(100, 255, 150, 0.8);
+        }
+
         @keyframes edge-flash {
             0%   { border-color: rgba(80, 160, 255, 0.9); box-shadow: inset 0 2px 4px rgba(255,255,255,0.15), inset 0 -2px 4px rgba(0,0,0,0.2), 0 0 28px rgba(80, 160, 255, 0.5); }
             100% { border-color: var(--glass-border);     box-shadow: inset 0 2px 4px rgba(255,255,255,0.15), inset 0 -2px 4px rgba(0,0,0,0.2), 0 20px 40px rgba(0,0,0,0.2); }
@@ -410,12 +414,21 @@
             100% { border-color: var(--glass-border);      box-shadow: inset 0 2px 4px rgba(255,255,255,0.15), inset 0 -2px 4px rgba(0,0,0,0.2), 0 20px 40px rgba(0,0,0,0.2); }
         }
 
+        @keyframes edge-flash-green {
+            0%   { border-color: rgba(100, 255, 150, 0.9); box-shadow: inset 0 2px 4px rgba(255,255,255,0.15), inset 0 -2px 4px rgba(0,0,0,0.2), 0 0 28px rgba(100, 255, 150, 0.5); }
+            100% { border-color: var(--glass-border);      box-shadow: inset 0 2px 4px rgba(255,255,255,0.15), inset 0 -2px 4px rgba(0,0,0,0.2), 0 20px 40px rgba(0,0,0,0.2); }
+        }
+
         .case-card.edge-hit {
             animation: edge-flash 0.8s ease-out forwards;
         }
 
         .case-card.edge-hit-white {
             animation: edge-flash-white 0.8s ease-out forwards;
+        }
+
+        .case-card.edge-hit-green {
+            animation: edge-flash-green 0.8s ease-out forwards;
         }
 
         /* Footer */
@@ -510,12 +523,12 @@
             <div id="fidgets" style="margin-top: 48px;">
                 <h3 style="margin-bottom: 24px; font-size: 1.4rem; color: var(--text);">Fidget Collection</h3>
                 <div class="case-grid">
-                    <div class="case-card" onclick="toggleCardWithRipple(event)">
+                    <div class="case-card fidget-card" onclick="toggleCardWithRipple(event, 'green')">
                         <div class="case-content">
                             <div class="case-header">
                                 <h3>Cone Spiral Fidget</h3>
                                 <div class="case-badges">
-                                    <span class="badge badge-custom">12 Combinations</span>
+                                    <span class="badge badge-custom">16 Combinations</span>
                                 </div>
                             </div>
                             <p class="case-brief-text">Mesmerizing spiral design. 2 pieces, 4 colors each. Mix & match.</p>
@@ -525,7 +538,7 @@
                         </div>
                     </div>
 
-                    <div class="case-card" onclick="toggleCardWithRipple(event)">
+                    <div class="case-card fidget-card" onclick="toggleCardWithRipple(event, 'green')">
                         <div class="case-content">
                             <div class="case-header">
                                 <h3>Fidget Snake</h3>
@@ -681,7 +694,7 @@
 
         const edgeTimers = new WeakMap();
 
-        function toggleCardWithRipple(event, useWhiteFlash = false) {
+        function toggleCardWithRipple(event, flashColor = null) {
             const card = event.currentTarget;
             const rect = card.getBoundingClientRect();
             const x = event.clientX - rect.left;
@@ -690,7 +703,7 @@
             document.querySelectorAll('.case-card').forEach(c => {
                 if (c !== card && c.classList.contains('active')) {
                     c.classList.remove('active');
-                    c.classList.remove('edge-hit', 'edge-hit-white');
+                    c.classList.remove('edge-hit', 'edge-hit-white', 'edge-hit-green');
                     clearTimeout(edgeTimers.get(c));
                 }
             });
@@ -720,7 +733,10 @@
             card.classList.toggle('active');
 
             if (card.classList.contains('active')) {
-                const flashClass = useWhiteFlash ? 'edge-hit-white' : 'edge-hit';
+                let flashClass = 'edge-hit';
+                if (flashColor === 'white') flashClass = 'edge-hit-white';
+                else if (flashColor === 'green') flashClass = 'edge-hit-green';
+
                 const t = setTimeout(() => {
                     card.classList.add(flashClass);
                     card.addEventListener('animationend', () => card.classList.remove(flashClass), { once: true });
@@ -728,7 +744,7 @@
                 edgeTimers.set(card, t);
             } else {
                 clearTimeout(edgeTimers.get(card));
-                card.classList.remove('edge-hit', 'edge-hit-white');
+                card.classList.remove('edge-hit', 'edge-hit-white', 'edge-hit-green');
             }
         }
 
