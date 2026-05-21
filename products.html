@@ -618,7 +618,7 @@
                 const t = setTimeout(() => {
                     card.classList.add('edge-hit');
                     card.addEventListener('animationend', () => card.classList.remove('edge-hit'), { once: true });
-                }, 900);
+                }, 800);
                 edgeTimers.set(card, t);
             } else {
                 clearTimeout(edgeTimers.get(card));
