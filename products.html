@@ -484,7 +484,7 @@
                     <h3>Fidgets</h3>
                     <p>Smooth, satisfying 3D printed fidget toys designed to soothe and entertain.</p>
                     <div class="product-pills">
-                        <span class="pill">Custom Designs</span>
+                        <span class="pill" onclick="scrollToFidgets(event)">2 Designs</span>
                     </div>
                 </div>
 
@@ -503,6 +503,41 @@
                     <p>Premium protective cases for Apple Watch. Precision fit, premium materials.</p>
                     <div class="product-pills">
                         <span class="pill" onclick="scrollToWatchCases(event)">Custom Fit</span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="fidgets" style="margin-top: 48px;">
+                <h3 style="margin-bottom: 24px; font-size: 1.4rem; color: var(--text);">Fidget Collection</h3>
+                <div class="case-grid">
+                    <div class="case-card" onclick="toggleCardWithRipple(event)">
+                        <div class="case-content">
+                            <div class="case-header">
+                                <h3>Cone Spiral Fidget</h3>
+                                <div class="case-badges">
+                                    <span class="badge badge-custom">12 Combinations</span>
+                                </div>
+                            </div>
+                            <p class="case-brief-text">Mesmerizing spiral design. 2 pieces, 4 colors each. Mix & match.</p>
+                        </div>
+                        <div class="case-description-overlay">
+                            <p class="case-description-text">The Cone Spiral Fidget features 2 interlocking pieces, each available in 4 vibrant colors: Red, Blue, Green, and Purple. Mix and match to create 12 unique color combinations. Smooth spiraling motion soothes stress and anxiety. Perfect for desk, pocket, or on-the-go fidgeting.</p>
+                        </div>
+                    </div>
+
+                    <div class="case-card" onclick="toggleCardWithRipple(event)">
+                        <div class="case-content">
+                            <div class="case-header">
+                                <h3>Fidget Snake</h3>
+                                <div class="case-badges">
+                                    <span class="badge badge-flex">Flexible</span>
+                                </div>
+                            </div>
+                            <p class="case-brief-text">Twisty, bendy satisfaction. Endless configurations. Smooth flow.</p>
+                        </div>
+                        <div class="case-description-overlay">
+                            <p class="case-description-text">The Fidget Snake is a flexible chain of segments that twist, bend, and undulate in smooth, satisfying motions. Create endless configurations—coil it, loop it, wave it. The quiet, tactile feedback makes it perfect for stress relief, focus, or just pure fidgeting fun. Available in classic black with a satisfying matte finish.</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -635,6 +670,12 @@
         function scrollToWatchCases(event) {
             event.stopPropagation();
             const section = document.getElementById('watch-cases');
+            section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        function scrollToFidgets(event) {
+            event.stopPropagation();
+            const section = document.getElementById('fidgets');
             section.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
 
