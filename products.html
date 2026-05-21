@@ -615,8 +615,7 @@
             card.classList.toggle('active');
 
             if (card.classList.contains('active')) {
-                const nearestEdge = Math.min(x, rect.width - x, y, rect.height - y);
-                const edgeDelay = (nearestEdge / maxRadius) * 1400 * 0.75;
+                const edgeDelay = 1400;
                 const t = setTimeout(() => {
                     card.classList.add('edge-hit');
                     card.addEventListener('animationend', () => card.classList.remove('edge-hit'), { once: true });
