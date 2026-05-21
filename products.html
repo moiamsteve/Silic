@@ -348,6 +348,10 @@
 
         .case-brief-text {
             display: block;
+            font-size: 0.9rem;
+            color: var(--muted);
+            line-height: 1.5;
+            margin: 0;
         }
 
         .case-description-text {
@@ -355,20 +359,20 @@
             top: 0;
             left: 0;
             right: 0;
-            display: block;
+            bottom: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            color: var(--muted);
+            line-height: 1.5;
+            margin: 0;
             clip-path: circle(0px at var(--ripple-x, 50%) var(--ripple-y, 50%));
+            transition: clip-path 0.8s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
         .case-card.active .case-description-text {
-            clip-path: circle(var(--ripple-radius, 0px) at var(--ripple-x, 50%) var(--ripple-y, 50%));
-        }
-
-        .ripple-effect {
-            position: absolute;
-            border-radius: 50%;
-            border: 2px solid rgba(200, 220, 255, 0.6);
-            pointer-events: none;
-            opacity: 0;
+            clip-path: circle(var(--ripple-radius, 500px) at var(--ripple-x, 50%) var(--ripple-y, 50%));
         }
 
         /* Footer */
@@ -541,49 +545,20 @@
             const xPercent = (x / rect.width) * 100;
             const yPercent = (y / rect.height) * 100;
 
-            const descText = card.querySelector('.case-description-text');
-            const isActive = card.classList.contains('active');
-
-            const diagonal = Math.sqrt(rect.width * rect.width + rect.height * rect.height);
-            const startRadius = 0;
-            const endRadius = diagonal;
-
             const otherCards = document.querySelectorAll('.case-card');
             otherCards.forEach(c => {
                 if (c !== card && c.classList.contains('active')) {
                     c.classList.remove('active');
-                    const otherDesc = c.querySelector('.case-description-text');
-                    if (otherDesc) {
-                        otherDesc.style.setProperty('--ripple-radius', '0px');
-                    }
                 }
             });
 
             card.style.setProperty('--ripple-x', xPercent + '%');
             card.style.setProperty('--ripple-y', yPercent + '%');
 
-            if (isActive) {
-                const animation = [
-                    { '--ripple-radius': endRadius + 'px' },
-                    { '--ripple-radius': '0px' }
-                ];
-                descText.animate(animation, {
-                    duration: 800,
-                    easing: 'ease-out'
-                });
-                card.classList.remove('active');
-            } else {
-                const animation = [
-                    { '--ripple-radius': '0px' },
-                    { '--ripple-radius': endRadius + 'px' }
-                ];
-                descText.animate(animation, {
-                    duration: 800,
-                    easing: 'ease-out'
-                });
-                card.classList.add('active');
-                descText.style.setProperty('--ripple-radius', endRadius + 'px');
-            }
+            const diagonal = Math.sqrt(rect.width * rect.width + rect.height * rect.height);
+            card.style.setProperty('--ripple-radius', diagonal + 'px');
+
+            card.classList.toggle('active');
         }
 
         (async () => {
