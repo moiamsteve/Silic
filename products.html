@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products — Silic</title>
+    <meta name="description" content="Silic products: Fidgets, iPhone cases, and Apple Watch cases. 3D printed and shipped with care.">
+    <meta property="og:title" content="Products — Silic">
+    <meta property="og:description" content="Explore our 3D printed products: fidgets, phone cases, and smartwatch cases.">
+    <meta property="og:type" content="website">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #07070f;
+            --text: #f0f0f5;
+            --muted: #8a8a9a;
+            --accent: #ff6b35;
+            --accent-dark: #e55a2b;
+            --accent-light: #ff8c5a;
+            --glass: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.12);
+            --glass-hover: rgba(255, 255, 255, 0.09);
+            --glow: rgba(200, 220, 255, 0.08);
+            --shine: rgba(255, 255, 255, 0.07);
+        }
+
+        @keyframes rgb-shift {
+            0% { border-color: rgba(100, 180, 255, 0.5); }
+            33% { border-color: rgba(200, 100, 255, 0.5); }
+            66% { border-color: rgba(150, 200, 255, 0.5); }
+            100% { border-color: rgba(100, 180, 255, 0.5); }
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Inter, 'Helvetica Neue', sans-serif;
+            color: var(--text);
+            background: var(--bg);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        .nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(40px);
+            -webkit-backdrop-filter: blur(40px);
+            background: rgba(7, 7, 15, 0.5);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 1px 0 rgba(255, 255, 255, 0.06);
+        }
+
+        .nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 24px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Section */
+        .section {
+            padding: 96px 24px;
+        }
+
+        .eyebrow {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: rgba(255, 255, 255, 0.45);
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .section h2 {
+            font-size: 2.6rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+        }
+
+        .section-lead {
+            font-size: 1.15rem;
+            color: var(--muted);
+            margin-bottom: 48px;
+            max-width: 600px;
+        }
+
+        /* Products Section */
+        .products {
+            background: var(--bg);
+        }
+
+        .product-category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-bottom: 64px;
+        }
+
+        .product-category-card {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(32px);
+            -webkit-backdrop-filter: blur(32px);
+            border-radius: 18px;
+            padding: 32px 24px;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            transform: translateZ(0);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            box-shadow: inset 0 1px 0 var(--shine), inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+        }
+
+        .product-category-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: inherit;
+        }
+
+        .product-category-card:hover {
+            background: var(--glass-hover);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-4px);
+            box-shadow: inset 0 1px 0 var(--shine), inset 0 -1px 0 rgba(0, 0, 0, 0.15), 0 20px 60px var(--glow);
+        }
+
+        .product-icon {
+            font-size: 3rem;
+            margin-bottom: 12px;
+        }
+
+        .product-category-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 8px;
+            color: var(--text);
+        }
+
+        .product-category-card p {
+            font-size: 0.95rem;
+            color: var(--muted);
+            margin-bottom: 16px;
+        }
+
+        .product-pills {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .pill {
+            font-size: 0.8rem;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: rgba(255, 255, 255, 0.8);
+            padding: 4px 12px;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            display: inline-block;
+            transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .pill:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.25);
+        }
+
+        .case-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+        }
+
+        .case-card {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(32px);
+            -webkit-backdrop-filter: blur(32px);
+            border-radius: 16px;
+            padding: 24px;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            transform: translateZ(0);
+            position: relative;
+            overflow: hidden;
+            box-shadow: inset 0 1px 0 var(--shine), inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+        }
+
+        .case-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: inherit;
+        }
+
+        .case-card:hover {
+            background: var(--glass-hover);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+            box-shadow: inset 0 1px 0 var(--shine), inset 0 -1px 0 rgba(0, 0, 0, 0.15), 0 15px 45px var(--glow);
+        }
+
+        .case-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+            gap: 12px;
+        }
+
+        .case-header h3 {
+            font-size: 1.2rem;
+            color: var(--text);
+            margin: 0;
+        }
+
+        .case-badges {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
+        .badge {
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            border: 1px solid;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .badge-flex {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .badge-hard {
+            background: rgba(100, 180, 255, 0.1);
+            border-color: rgba(100, 180, 255, 0.3);
+            color: rgb(150, 200, 255);
+        }
+
+        .badge-rgb {
+            background: rgba(255, 255, 255, 0.08);
+            background: linear-gradient(135deg, rgba(120, 200, 255, 0.12), rgba(200, 120, 255, 0.12));
+            border-color: rgba(150, 180, 255, 0.3);
+            color: rgb(200, 220, 255);
+            animation: rgb-shift 3s ease-in-out infinite;
+        }
+
+        .badge-custom {
+            background: rgba(180, 100, 255, 0.1);
+            border-color: rgba(180, 100, 255, 0.3);
+            color: rgb(200, 150, 255);
+        }
+
+        .case-card p {
+            font-size: 0.9rem;
+            color: var(--muted);
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(7, 7, 15, 0.8);
+            padding: 48px 24px;
+            text-align: center;
+            color: var(--muted);
+            font-size: 14px;
+            border-top: 1px solid var(--glass-border);
+        }
+
+        /* Responsive */
+        @media (max-width: 860px) {
+            .section h2 {
+                font-size: 1.8rem;
+            }
+
+            .nav-links {
+                gap: 14px;
+            }
+
+            .product-category-grid,
+            .case-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section {
+                padding: 80px 20px;
+            }
+
+            .case-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .case-badges {
+                justify-content: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="/" class="logo">Silic</a>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/#team">Team</a></li>
+                <li><a href="/#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Products -->
+    <section class="products section">
+        <div class="container">
+            <div class="eyebrow">What We Make</div>
+            <h2>Built to Impress</h2>
+            <p class="section-lead">Custom designs, precision prints, shipped via UPS. Fidgets, phone cases, and smartwatch cases engineered for quality.</p>
+
+            <div class="product-category-grid">
+                <div class="product-category-card">
+                    <div class="product-icon">🎮</div>
+                    <h3>Fidgets</h3>
+                    <p>Smooth, satisfying 3D printed fidget toys designed to soothe and entertain.</p>
+                    <div class="product-pills">
+                        <span class="pill">Custom Designs</span>
+                    </div>
+                </div>
+
+                <div class="product-category-card">
+                    <div class="product-icon">📱</div>
+                    <h3>iPhone Cases</h3>
+                    <p>4 styles: Flex, Hard, Custom art, and Pro with RGB. Built tough, designed sleek.</p>
+                    <div class="product-pills">
+                        <span class="pill">4 Variants</span>
+                    </div>
+                </div>
+
+                <div class="product-category-card">
+                    <div class="product-icon">⌚</div>
+                    <h3>Apple Watch Cases</h3>
+                    <p>Premium protective cases for Apple Watch. Precision fit, premium materials.</p>
+                    <div class="product-pills">
+                        <span class="pill">Custom Fit</span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="iphone-cases" style="margin-top: 48px;">
+                <h3 style="margin-bottom: 24px; font-size: 1.4rem; color: var(--text);">iPhone Case Variants</h3>
+                <div class="case-grid">
+                    <div class="case-card">
+                        <div class="case-header">
+                            <h3>TPU Flex</h3>
+                            <div class="case-badges">
+                                <span class="badge badge-flex">Flexible</span>
+                            </div>
+                        </div>
+                        <p>Soft, flexible 3D printed TPU case. Absorbs impact. Easy on, easy off.</p>
+                    </div>
+
+                    <div class="case-card">
+                        <div class="case-header">
+                            <h3>Hard Case</h3>
+                            <div class="case-badges">
+                                <span class="badge badge-hard">Hard Shell</span>
+                            </div>
+                        </div>
+                        <p>Rigid protective shell. Maximum durability. Sleek, slim design.</p>
+                    </div>
+
+                    <div class="case-card">
+                        <div class="case-header">
+                            <h3>Custom Case</h3>
+                            <div class="case-badges">
+                                <span class="badge badge-custom">Custom · Blaire</span>
+                            </div>
+                        </div>
+                        <p>Unique design hand-drawn by Blaire. One-of-a-kind art. Your style.</p>
+                    </div>
+
+                    <div class="case-card">
+                        <div class="case-header">
+                            <h3>Case Pro</h3>
+                            <div class="case-badges">
+                                <span class="badge badge-rgb">RGB</span>
+                                <span class="badge badge-hard">Hard Shell</span>
+                            </div>
+                        </div>
+                        <p>Premium case with integrated RGB fan. Cooling + protection. The ultimate.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Silic. Made by young creators. Printed with ❤️ and shipped via UPS.</p>
+    </footer>
+
+    <!-- Analytics -->
+    <script>
+        (async () => {
+            const API = 'https://mhnvnh6pr6.execute-api.us-east-1.amazonaws.com';
+            const key = 'visitLogged:' + location.pathname;
+            if (sessionStorage.getItem(key)) return;
+            sessionStorage.setItem(key, '1');
+            try {
+                const { ip } = await (await fetch('https://api.ipify.org?format=json')).json();
+                await fetch(API + '/log-access', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        ip,
+                        success: true,
+                        userAgent: navigator.userAgent + ' | path=' + location.pathname
+                    })
+                });
+            } catch (_) { /* analytics best-effort */ }
+        })();
+    </script>
+</body>
+</html>
