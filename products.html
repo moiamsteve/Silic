@@ -362,17 +362,16 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: linear-gradient(135deg, rgba(40, 50, 80, 0.95) 0%, rgba(20, 25, 45, 0.95) 100%);
-            backdrop-filter: blur(50px);
-            -webkit-backdrop-filter: blur(50px);
+            background: #0e0e1a;
             z-index: 2;
             clip-path: circle(0px at var(--ripple-x, 50%) var(--ripple-y, 50%));
-            transition: clip-path 0.9s cubic-bezier(0.23, 1, 0.32, 1);
+            transition: clip-path 1.4s cubic-bezier(0.23, 1, 0.32, 1);
             display: flex;
             align-items: center;
             justify-content: center;
             padding: 24px;
             pointer-events: none;
+            will-change: clip-path;
         }
 
         .case-card.active .case-description-overlay {
@@ -386,21 +385,24 @@
             line-height: 1.6;
             margin: 0;
             text-align: center;
-            opacity: 0;
-            transition: opacity 0.3s ease 0.3s;
-        }
-
-        .case-card.active .case-description-text {
-            opacity: 1;
         }
 
         .ripple-circle {
             position: absolute;
-            border: 2px solid rgba(200, 220, 255, 0.6);
+            border: 2px solid rgba(120, 180, 255, 0.7);
             border-radius: 50%;
             pointer-events: none;
             z-index: 3;
             transform: translate(-50%, -50%);
+        }
+
+        @keyframes edge-flash {
+            0%   { border-color: rgba(80, 160, 255, 0.9); box-shadow: inset 0 2px 4px rgba(255,255,255,0.15), inset 0 -2px 4px rgba(0,0,0,0.2), 0 0 28px rgba(80, 160, 255, 0.5); }
+            100% { border-color: var(--glass-border);     box-shadow: inset 0 2px 4px rgba(255,255,255,0.15), inset 0 -2px 4px rgba(0,0,0,0.2), 0 20px 40px rgba(0,0,0,0.2); }
+        }
+
+        .case-card.edge-hit {
+            animation: edge-flash 0.8s ease-out forwards;
         }
 
         /* Footer */
@@ -573,53 +575,54 @@
             section.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
 
+        const edgeTimers = new WeakMap();
+
         function toggleCardWithRipple(event) {
             const card = event.currentTarget;
             const rect = card.getBoundingClientRect();
             const x = event.clientX - rect.left;
             const y = event.clientY - rect.top;
-            const xPercent = (x / rect.width) * 100;
-            const yPercent = (y / rect.height) * 100;
 
-            const otherCards = document.querySelectorAll('.case-card');
-            otherCards.forEach(c => {
+            document.querySelectorAll('.case-card').forEach(c => {
                 if (c !== card && c.classList.contains('active')) {
                     c.classList.remove('active');
+                    clearTimeout(edgeTimers.get(c));
                 }
             });
 
-            const cornerDistances = [
+            const maxRadius = Math.max(
                 Math.sqrt(x * x + y * y),
-                Math.sqrt((rect.width - x) * (rect.width - x) + y * y),
-                Math.sqrt(x * x + (rect.height - y) * (rect.height - y)),
-                Math.sqrt((rect.width - x) * (rect.width - x) + (rect.height - y) * (rect.height - y))
-            ];
-            const maxRadius = Math.max(...cornerDistances) + 20;
+                Math.sqrt((rect.width - x) ** 2 + y * y),
+                Math.sqrt(x * x + (rect.height - y) ** 2),
+                Math.sqrt((rect.width - x) ** 2 + (rect.height - y) ** 2)
+            ) + 10;
 
-            card.style.setProperty('--ripple-x', xPercent + '%');
-            card.style.setProperty('--ripple-y', yPercent + '%');
+            card.style.setProperty('--ripple-x', ((x / rect.width) * 100) + '%');
+            card.style.setProperty('--ripple-y', ((y / rect.height) * 100) + '%');
             card.style.setProperty('--ripple-radius', maxRadius + 'px');
 
             const circle = document.createElement('div');
             circle.classList.add('ripple-circle');
             circle.style.left = x + 'px';
             circle.style.top = y + 'px';
-            circle.style.width = '0px';
-            circle.style.height = '0px';
             card.appendChild(circle);
 
-            const animation = circle.animate([
-                { width: '0px', height: '0px', opacity: 0.8, borderWidth: '3px' },
+            circle.animate([
+                { width: '0px', height: '0px', opacity: 1,   borderWidth: '2.5px' },
                 { width: (maxRadius * 2) + 'px', height: (maxRadius * 2) + 'px', opacity: 0, borderWidth: '1px' }
-            ], {
-                duration: 900,
-                easing: 'cubic-bezier(0.23, 1, 0.32, 1)',
-                fill: 'forwards'
-            });
-
-            animation.onfinish = () => circle.remove();
+            ], { duration: 1400, easing: 'cubic-bezier(0.23, 1, 0.32, 1)' }).onfinish = () => circle.remove();
 
             card.classList.toggle('active');
+
+            if (card.classList.contains('active')) {
+                const t = setTimeout(() => {
+                    card.classList.add('edge-hit');
+                    card.addEventListener('animationend', () => card.classList.remove('edge-hit'), { once: true });
+                }, 1400);
+                edgeTimers.set(card, t);
+            } else {
+                clearTimeout(edgeTimers.get(card));
+            }
         }
 
         (async () => {
