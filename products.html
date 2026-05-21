@@ -339,28 +339,6 @@
 
         .case-card {
             cursor: pointer;
-        }
-
-        .case-description {
-            display: none;
-            margin-top: 16px;
-            padding-top: 16px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            font-size: 0.85rem;
-            line-height: 1.6;
-            color: var(--muted);
-        }
-
-        .case-card.active .case-description {
-            display: block;
-        }
-
-        .case-card.active {
-            background: var(--glass-hover);
-            border-color: rgba(255, 255, 255, 0.28);
-        }
-
-        .case-card {
             position: relative;
             overflow: hidden;
         }
@@ -378,25 +356,51 @@
             margin: 0;
         }
 
-        .case-description-text {
+        .case-description-overlay {
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
+            background: linear-gradient(135deg, rgba(40, 50, 80, 0.95) 0%, rgba(20, 25, 45, 0.95) 100%);
+            backdrop-filter: blur(50px);
+            -webkit-backdrop-filter: blur(50px);
+            z-index: 2;
+            clip-path: circle(0px at var(--ripple-x, 50%) var(--ripple-y, 50%));
+            transition: clip-path 0.9s cubic-bezier(0.23, 1, 0.32, 1);
             display: flex;
             align-items: center;
             justify-content: center;
+            padding: 24px;
+            pointer-events: none;
+        }
+
+        .case-card.active .case-description-overlay {
+            clip-path: circle(var(--ripple-radius, 800px) at var(--ripple-x, 50%) var(--ripple-y, 50%));
+            pointer-events: auto;
+        }
+
+        .case-description-text {
             font-size: 0.9rem;
-            color: var(--muted);
-            line-height: 1.5;
+            color: var(--text);
+            line-height: 1.6;
             margin: 0;
-            clip-path: circle(0px at var(--ripple-x, 50%) var(--ripple-y, 50%));
-            transition: clip-path 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+            text-align: center;
+            opacity: 0;
+            transition: opacity 0.3s ease 0.3s;
         }
 
         .case-card.active .case-description-text {
-            clip-path: circle(var(--ripple-radius, 500px) at var(--ripple-x, 50%) var(--ripple-y, 50%));
+            opacity: 1;
+        }
+
+        .ripple-circle {
+            position: absolute;
+            border: 2px solid rgba(200, 220, 255, 0.6);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 3;
+            transform: translate(-50%, -50%);
         }
 
         /* Footer */
@@ -501,7 +505,9 @@
                             </div>
                             <p class="case-brief-text">Soft, flexible 3D printed TPU case. Absorbs impact. Easy on, easy off.</p>
                         </div>
-                        <p class="case-description-text" style="padding: 24px;">Perfect for those who want maximum flexibility and impact absorption. The TPU material is soft to the touch while providing excellent protection. Fits snugly without adding bulk. Easy to install and remove. Available in multiple colors.</p>
+                        <div class="case-description-overlay">
+                            <p class="case-description-text">Perfect for those who want maximum flexibility and impact absorption. The TPU material is soft to the touch while providing excellent protection. Fits snugly without adding bulk. Easy to install and remove. Available in multiple colors.</p>
+                        </div>
                     </div>
 
                     <div class="case-card" onclick="toggleCardWithRipple(event)">
@@ -514,7 +520,9 @@
                             </div>
                             <p class="case-brief-text">Rigid protective shell. Maximum durability. Sleek, slim design.</p>
                         </div>
-                        <p class="case-description-text" style="padding: 24px;">Premium hard polycarbonate shell provides maximum protection against drops and impacts. Ultra-slim profile keeps your phone feeling lightweight. Raised edges protect screen and camera. Precision-cut for perfect fit and easy access to all ports and buttons.</p>
+                        <div class="case-description-overlay">
+                            <p class="case-description-text">Premium hard polycarbonate shell provides maximum protection against drops and impacts. Ultra-slim profile keeps your phone feeling lightweight. Raised edges protect screen and camera. Precision-cut for perfect fit and easy access to all ports and buttons.</p>
+                        </div>
                     </div>
 
                     <div class="case-card" onclick="toggleCardWithRipple(event)">
@@ -527,7 +535,9 @@
                             </div>
                             <p class="case-brief-text">Unique design hand-drawn by Blaire. One-of-a-kind art. Your style.</p>
                         </div>
-                        <p class="case-description-text" style="padding: 24px;">Each custom case is hand-designed and illustrated by Blaire. Combine hard shell durability with artistic custom designs. Express your unique personality with original artwork. Every case is one-of-a-kind and made just for you. Perfect as a gift or personal statement.</p>
+                        <div class="case-description-overlay">
+                            <p class="case-description-text">Each custom case is hand-designed and illustrated by Blaire. Combine hard shell durability with artistic custom designs. Express your unique personality with original artwork. Every case is one-of-a-kind and made just for you. Perfect as a gift or personal statement.</p>
+                        </div>
                     </div>
 
                     <div class="case-card" onclick="toggleCardWithRipple(event)">
@@ -541,7 +551,9 @@
                             </div>
                             <p class="case-brief-text">Premium case with integrated RGB fan. Cooling + protection. The ultimate.</p>
                         </div>
-                        <p class="case-description-text" style="padding: 24px;">The ultimate flagship case combines hard shell protection with an integrated RGB cooling fan. Active heat dissipation keeps your phone cool during intensive use. Customizable RGB lighting syncs with your phone. Premium materials and precision engineering throughout. For those who demand the best.</p>
+                        <div class="case-description-overlay">
+                            <p class="case-description-text">The ultimate flagship case combines hard shell protection with an integrated RGB cooling fan. Active heat dissipation keeps your phone cool during intensive use. Customizable RGB lighting syncs with your phone. Premium materials and precision engineering throughout. For those who demand the best.</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -576,11 +588,36 @@
                 }
             });
 
+            const cornerDistances = [
+                Math.sqrt(x * x + y * y),
+                Math.sqrt((rect.width - x) * (rect.width - x) + y * y),
+                Math.sqrt(x * x + (rect.height - y) * (rect.height - y)),
+                Math.sqrt((rect.width - x) * (rect.width - x) + (rect.height - y) * (rect.height - y))
+            ];
+            const maxRadius = Math.max(...cornerDistances) + 20;
+
             card.style.setProperty('--ripple-x', xPercent + '%');
             card.style.setProperty('--ripple-y', yPercent + '%');
+            card.style.setProperty('--ripple-radius', maxRadius + 'px');
 
-            const diagonal = Math.sqrt(rect.width * rect.width + rect.height * rect.height);
-            card.style.setProperty('--ripple-radius', diagonal + 'px');
+            const circle = document.createElement('div');
+            circle.classList.add('ripple-circle');
+            circle.style.left = x + 'px';
+            circle.style.top = y + 'px';
+            circle.style.width = '0px';
+            circle.style.height = '0px';
+            card.appendChild(circle);
+
+            const animation = circle.animate([
+                { width: '0px', height: '0px', opacity: 0.8, borderWidth: '3px' },
+                { width: (maxRadius * 2) + 'px', height: (maxRadius * 2) + 'px', opacity: 0, borderWidth: '1px' }
+            ], {
+                duration: 900,
+                easing: 'cubic-bezier(0.23, 1, 0.32, 1)',
+                fill: 'forwards'
+            });
+
+            animation.onfinish = () => circle.remove();
 
             card.classList.toggle('active');
         }
