@@ -84,8 +84,32 @@
             transition: color 0.3s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
+        .nav-links a {
+            position: relative;
+        }
+
         .nav-links a:hover {
             color: var(--accent);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--accent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            opacity: 1;
+        }
+
+        .nav-links a.active::after {
+            opacity: 1;
         }
 
         /* Container */
@@ -421,7 +445,7 @@
         <div class="nav-inner">
             <a href="/" class="logo">Silic</a>
             <ul class="nav-links">
-                <li><a href="/">Home</a></li>
+                <li><a href="/products" class="active">Products</a></li>
                 <li><a href="/#team">Team</a></li>
                 <li><a href="/#contact">Contact</a></li>
             </ul>
