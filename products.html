@@ -336,16 +336,9 @@
             border-color: rgba(255, 255, 255, 0.28);
         }
 
-        .ripple {
-            position: absolute;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(200, 220, 255, 0.4) 0%, rgba(200, 220, 255, 0.2) 50%, transparent 70%);
-            pointer-events: none;
-            transform: scale(0);
-        }
-
         .case-card {
             position: relative;
+            overflow: hidden;
         }
 
         .case-content {
@@ -353,25 +346,29 @@
             z-index: 1;
         }
 
+        .case-brief-text {
+            display: block;
+        }
+
         .case-description-text {
-            opacity: 0;
-            transition: opacity 0.6s ease;
-            pointer-events: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            display: block;
+            clip-path: circle(0px at var(--ripple-x, 50%) var(--ripple-y, 50%));
         }
 
         .case-card.active .case-description-text {
-            opacity: 1;
-            pointer-events: auto;
+            clip-path: circle(var(--ripple-radius, 0px) at var(--ripple-x, 50%) var(--ripple-y, 50%));
         }
 
-        .case-brief-text {
-            opacity: 1;
-            transition: opacity 0.6s ease;
-        }
-
-        .case-card.active .case-brief-text {
-            opacity: 0;
+        .ripple-effect {
+            position: absolute;
+            border-radius: 50%;
+            border: 2px solid rgba(200, 220, 255, 0.6);
             pointer-events: none;
+            opacity: 0;
         }
 
         /* Footer */
@@ -475,8 +472,8 @@
                                 </div>
                             </div>
                             <p class="case-brief-text">Soft, flexible 3D printed TPU case. Absorbs impact. Easy on, easy off.</p>
-                            <p class="case-description-text">Perfect for those who want maximum flexibility and impact absorption. The TPU material is soft to the touch while providing excellent protection. Fits snugly without adding bulk. Easy to install and remove. Available in multiple colors.</p>
                         </div>
+                        <p class="case-description-text" style="padding: 24px;">Perfect for those who want maximum flexibility and impact absorption. The TPU material is soft to the touch while providing excellent protection. Fits snugly without adding bulk. Easy to install and remove. Available in multiple colors.</p>
                     </div>
 
                     <div class="case-card" onclick="toggleCardWithRipple(event)">
@@ -488,8 +485,8 @@
                                 </div>
                             </div>
                             <p class="case-brief-text">Rigid protective shell. Maximum durability. Sleek, slim design.</p>
-                            <p class="case-description-text">Premium hard polycarbonate shell provides maximum protection against drops and impacts. Ultra-slim profile keeps your phone feeling lightweight. Raised edges protect screen and camera. Precision-cut for perfect fit and easy access to all ports and buttons.</p>
                         </div>
+                        <p class="case-description-text" style="padding: 24px;">Premium hard polycarbonate shell provides maximum protection against drops and impacts. Ultra-slim profile keeps your phone feeling lightweight. Raised edges protect screen and camera. Precision-cut for perfect fit and easy access to all ports and buttons.</p>
                     </div>
 
                     <div class="case-card" onclick="toggleCardWithRipple(event)">
@@ -501,8 +498,8 @@
                                 </div>
                             </div>
                             <p class="case-brief-text">Unique design hand-drawn by Blaire. One-of-a-kind art. Your style.</p>
-                            <p class="case-description-text">Each custom case is hand-designed and illustrated by Blaire. Combine hard shell durability with artistic custom designs. Express your unique personality with original artwork. Every case is one-of-a-kind and made just for you. Perfect as a gift or personal statement.</p>
                         </div>
+                        <p class="case-description-text" style="padding: 24px;">Each custom case is hand-designed and illustrated by Blaire. Combine hard shell durability with artistic custom designs. Express your unique personality with original artwork. Every case is one-of-a-kind and made just for you. Perfect as a gift or personal statement.</p>
                     </div>
 
                     <div class="case-card" onclick="toggleCardWithRipple(event)">
@@ -515,8 +512,8 @@
                                 </div>
                             </div>
                             <p class="case-brief-text">Premium case with integrated RGB fan. Cooling + protection. The ultimate.</p>
-                            <p class="case-description-text">The ultimate flagship case combines hard shell protection with an integrated RGB cooling fan. Active heat dissipation keeps your phone cool during intensive use. Customizable RGB lighting syncs with your phone. Premium materials and precision engineering throughout. For those who demand the best.</p>
                         </div>
+                        <p class="case-description-text" style="padding: 24px;">The ultimate flagship case combines hard shell protection with an integrated RGB cooling fan. Active heat dissipation keeps your phone cool during intensive use. Customizable RGB lighting syncs with your phone. Premium materials and precision engineering throughout. For those who demand the best.</p>
                     </div>
                 </div>
             </div>
@@ -541,37 +538,52 @@
             const rect = card.getBoundingClientRect();
             const x = event.clientX - rect.left;
             const y = event.clientY - rect.top;
+            const xPercent = (x / rect.width) * 100;
+            const yPercent = (y / rect.height) * 100;
 
-            const ripple = document.createElement('div');
-            ripple.classList.add('ripple');
-            ripple.style.left = x + 'px';
-            ripple.style.top = y + 'px';
-            ripple.style.width = '0px';
-            ripple.style.height = '0px';
+            const descText = card.querySelector('.case-description-text');
+            const isActive = card.classList.contains('active');
 
-            card.appendChild(ripple);
-
-            const maxDim = Math.max(rect.width, rect.height);
-            const animation = ripple.animate([
-                { transform: 'scale(0)', opacity: 0.8 },
-                { transform: `scale(${maxDim * 2})`, opacity: 0 }
-            ], {
-                duration: 600,
-                easing: 'ease-out'
-            });
-
-            animation.onfinish = () => {
-                ripple.remove();
-            };
+            const diagonal = Math.sqrt(rect.width * rect.width + rect.height * rect.height);
+            const startRadius = 0;
+            const endRadius = diagonal;
 
             const otherCards = document.querySelectorAll('.case-card');
             otherCards.forEach(c => {
-                if (c !== card) {
+                if (c !== card && c.classList.contains('active')) {
                     c.classList.remove('active');
+                    const otherDesc = c.querySelector('.case-description-text');
+                    if (otherDesc) {
+                        otherDesc.style.setProperty('--ripple-radius', '0px');
+                    }
                 }
             });
 
-            card.classList.toggle('active');
+            card.style.setProperty('--ripple-x', xPercent + '%');
+            card.style.setProperty('--ripple-y', yPercent + '%');
+
+            if (isActive) {
+                const animation = [
+                    { '--ripple-radius': endRadius + 'px' },
+                    { '--ripple-radius': '0px' }
+                ];
+                descText.animate(animation, {
+                    duration: 800,
+                    easing: 'ease-out'
+                });
+                card.classList.remove('active');
+            } else {
+                const animation = [
+                    { '--ripple-radius': '0px' },
+                    { '--ripple-radius': endRadius + 'px' }
+                ];
+                descText.animate(animation, {
+                    duration: 800,
+                    easing: 'ease-out'
+                });
+                card.classList.add('active');
+                descText.style.setProperty('--ripple-radius', endRadius + 'px');
+            }
         }
 
         (async () => {
