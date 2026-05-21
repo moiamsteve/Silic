@@ -313,6 +313,29 @@
             margin: 0;
         }
 
+        .case-card {
+            cursor: pointer;
+        }
+
+        .case-description {
+            display: none;
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.85rem;
+            line-height: 1.6;
+            color: var(--muted);
+        }
+
+        .case-card.active .case-description {
+            display: block;
+        }
+
+        .case-card.active {
+            background: var(--glass-hover);
+            border-color: rgba(255, 255, 255, 0.28);
+        }
+
         /* Footer */
         footer {
             background: rgba(7, 7, 15, 0.8);
@@ -405,7 +428,7 @@
             <div id="iphone-cases" style="margin-top: 48px;">
                 <h3 style="margin-bottom: 24px; font-size: 1.4rem; color: var(--text);">iPhone Case Variants</h3>
                 <div class="case-grid">
-                    <div class="case-card">
+                    <div class="case-card" onclick="toggleCard(this)">
                         <div class="case-header">
                             <h3>TPU Flex</h3>
                             <div class="case-badges">
@@ -413,9 +436,12 @@
                             </div>
                         </div>
                         <p>Soft, flexible 3D printed TPU case. Absorbs impact. Easy on, easy off.</p>
+                        <div class="case-description">
+                            Perfect for those who want maximum flexibility and impact absorption. The TPU material is soft to the touch while providing excellent protection. Fits snugly without adding bulk. Easy to install and remove. Available in multiple colors.
+                        </div>
                     </div>
 
-                    <div class="case-card">
+                    <div class="case-card" onclick="toggleCard(this)">
                         <div class="case-header">
                             <h3>Hard Case</h3>
                             <div class="case-badges">
@@ -423,9 +449,12 @@
                             </div>
                         </div>
                         <p>Rigid protective shell. Maximum durability. Sleek, slim design.</p>
+                        <div class="case-description">
+                            Premium hard polycarbonate shell provides maximum protection against drops and impacts. Ultra-slim profile keeps your phone feeling lightweight. Raised edges protect screen and camera. Precision-cut for perfect fit and easy access to all ports and buttons.
+                        </div>
                     </div>
 
-                    <div class="case-card">
+                    <div class="case-card" onclick="toggleCard(this)">
                         <div class="case-header">
                             <h3>Custom Case</h3>
                             <div class="case-badges">
@@ -433,9 +462,12 @@
                             </div>
                         </div>
                         <p>Unique design hand-drawn by Blaire. One-of-a-kind art. Your style.</p>
+                        <div class="case-description">
+                            Each custom case is hand-designed and illustrated by Blaire. Combine hard shell durability with artistic custom designs. Express your unique personality with original artwork. Every case is one-of-a-kind and made just for you. Perfect as a gift or personal statement.
+                        </div>
                     </div>
 
-                    <div class="case-card">
+                    <div class="case-card" onclick="toggleCard(this)">
                         <div class="case-header">
                             <h3>Case Pro</h3>
                             <div class="case-badges">
@@ -444,6 +476,9 @@
                             </div>
                         </div>
                         <p>Premium case with integrated RGB fan. Cooling + protection. The ultimate.</p>
+                        <div class="case-description">
+                            The ultimate flagship case combines hard shell protection with an integrated RGB cooling fan. Active heat dissipation keeps your phone cool during intensive use. Customizable RGB lighting syncs with your phone. Premium materials and precision engineering throughout. For those who demand the best.
+                        </div>
                     </div>
                 </div>
             </div>
@@ -457,6 +492,16 @@
 
     <!-- Analytics -->
     <script>
+        function toggleCard(element) {
+            const cards = document.querySelectorAll('.case-card');
+            cards.forEach(card => {
+                if (card !== element) {
+                    card.classList.remove('active');
+                }
+            });
+            element.classList.toggle('active');
+        }
+
         (async () => {
             const API = 'https://mhnvnh6pr6.execute-api.us-east-1.amazonaws.com';
             const key = 'visitLogged:' + location.pathname;
