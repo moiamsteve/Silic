@@ -359,18 +359,21 @@
 
         .case-description-overlay {
             position: absolute;
-            top: 72px;
+            top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: #0e0e1a;
+            background: linear-gradient(to bottom, transparent 72px, #0e0e1a 72px);
             z-index: 2;
             clip-path: circle(0px at var(--ripple-x, 50%) var(--ripple-y, 50%));
             transition: clip-path 1.4s cubic-bezier(0.23, 1, 0.32, 1);
             display: flex;
-            align-items: flex-start;
+            align-items: center;
             justify-content: center;
-            padding: 16px 24px 24px;
+            padding-top: 72px;
+            padding-left: 24px;
+            padding-right: 24px;
+            padding-bottom: 24px;
             pointer-events: none;
             will-change: clip-path;
         }
@@ -766,29 +769,16 @@
                 }
             });
 
-            const overlayTop = 72;
-            const overlayY = y - overlayTop;
-            const overlayHeight = rect.height - overlayTop;
-
-            const rippleRadius = Math.max(
+            const maxRadius = Math.max(
                 Math.sqrt(x * x + y * y),
                 Math.sqrt((rect.width - x) ** 2 + y * y),
                 Math.sqrt(x * x + (rect.height - y) ** 2),
                 Math.sqrt((rect.width - x) ** 2 + (rect.height - y) ** 2)
             ) + 10;
 
-            const clipRadius = Math.max(
-                Math.sqrt(x * x + overlayY * overlayY),
-                Math.sqrt((rect.width - x) ** 2 + overlayY * overlayY),
-                Math.sqrt(x * x + (overlayHeight - overlayY) ** 2),
-                Math.sqrt((rect.width - x) ** 2 + (overlayHeight - overlayY) ** 2)
-            ) + 10;
-
-            const maxRadius = rippleRadius;
-
             card.style.setProperty('--ripple-x', x + 'px');
-            card.style.setProperty('--ripple-y', overlayY + 'px');
-            card.style.setProperty('--ripple-radius', clipRadius + 'px');
+            card.style.setProperty('--ripple-y', y + 'px');
+            card.style.setProperty('--ripple-radius', maxRadius + 'px');
 
             card.querySelectorAll('.ripple-circle').forEach(c => c.remove());
 
