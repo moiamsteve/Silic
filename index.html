@@ -715,9 +715,15 @@
             position: relative;
         }
 
-        .featured-card {
+        .featured-stack {
             max-width: 560px;
             margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .featured-card {
             background: var(--glass);
             border: 1.5px solid var(--glass-border);
             backdrop-filter: blur(50px);
@@ -837,10 +843,17 @@
 
     <!-- Featured Product -->
     <section class="featured-product">
-        <div class="featured-card">
-            <div class="featured-eyebrow">Featured</div>
-            <h2 class="featured-title">Silic Case <span class="flex-word"><span class="flex-letter">F</span><span class="flex-letter">l</span><span class="flex-letter">e</span><span class="flex-letter">x</span></span></h2>
-            <p class="featured-price"><strong>$12</strong><span class="featured-price-divider">·</span><strong>$15</strong> custom</p>
+        <div class="featured-stack">
+            <div class="featured-card">
+                <div class="featured-eyebrow">Featured</div>
+                <h2 class="featured-title">Silic Case <span class="flex-word"><span class="flex-letter">F</span><span class="flex-letter">l</span><span class="flex-letter">e</span><span class="flex-letter">x</span></span></h2>
+                <p class="featured-price"><strong>$12</strong><span class="featured-price-divider">·</span><strong>$15</strong> custom</p>
+            </div>
+            <div class="featured-card">
+                <div class="featured-eyebrow">New</div>
+                <h2 class="featured-title">Milanese Loop Silic Band</h2>
+                <p class="featured-price"><strong>$6</strong></p>
+            </div>
         </div>
     </section>
 
