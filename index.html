@@ -707,6 +707,91 @@
                 justify-content: flex-start;
             }
         }
+        /* Promo Banner */
+        .promo-banner {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.02) 100%);
+            border-bottom: 1px solid var(--glass-border);
+            padding: 14px 24px;
+            text-align: center;
+            backdrop-filter: blur(40px);
+            -webkit-backdrop-filter: blur(40px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .promo-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.25) 50%, transparent 100%);
+        }
+
+        .promo-text {
+            font-size: 0.95rem;
+            color: var(--text);
+            letter-spacing: 0.01em;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .promo-title {
+            font-weight: 600;
+        }
+
+        .flex-word {
+            display: inline-block;
+            color: var(--accent);
+            font-weight: 700;
+            cursor: pointer;
+            transform-origin: center;
+        }
+
+        .flex-word .flex-letter {
+            display: inline-block;
+            transition: transform 0.2s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .flex-word:hover .flex-letter,
+        .flex-word:active .flex-letter {
+            animation: bend 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .flex-word:hover .flex-letter:nth-child(1),
+        .flex-word:active .flex-letter:nth-child(1) { animation-delay: 0s; }
+        .flex-word:hover .flex-letter:nth-child(2),
+        .flex-word:active .flex-letter:nth-child(2) { animation-delay: 0.07s; }
+        .flex-word:hover .flex-letter:nth-child(3),
+        .flex-word:active .flex-letter:nth-child(3) { animation-delay: 0.14s; }
+        .flex-word:hover .flex-letter:nth-child(4),
+        .flex-word:active .flex-letter:nth-child(4) { animation-delay: 0.21s; }
+
+        @keyframes bend {
+            0%   { transform: translateY(0) rotate(0deg) skewX(0deg); }
+            25%  { transform: translateY(-6px) rotate(-12deg) skewX(-8deg); }
+            50%  { transform: translateY(2px) rotate(8deg) skewX(6deg); }
+            75%  { transform: translateY(-3px) rotate(-4deg) skewX(-3deg); }
+            100% { transform: translateY(0) rotate(0deg) skewX(0deg); }
+        }
+
+        .promo-price {
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+
+        .promo-price strong {
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        .promo-divider {
+            color: rgba(255, 255, 255, 0.2);
+        }
     </style>
 </head>
 <body>
@@ -721,6 +806,15 @@
             </ul>
         </div>
     </nav>
+
+    <!-- Promo Banner -->
+    <div class="promo-banner">
+        <div class="promo-text">
+            <span class="promo-title">Silic Case <span class="flex-word"><span class="flex-letter">F</span><span class="flex-letter">l</span><span class="flex-letter">e</span><span class="flex-letter">x</span></span></span>
+            <span class="promo-divider">·</span>
+            <span class="promo-price"><strong>$12</strong> · <strong>$15</strong> custom</span>
+        </div>
+    </div>
 
     <!-- Hero -->
     <section class="hero">
