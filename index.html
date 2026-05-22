@@ -756,6 +756,20 @@
             margin-bottom: 14px;
         }
 
+        @keyframes rainbow {
+            0%   { color: #ff4444; }
+            16%  { color: #ff9900; }
+            33%  { color: #ffee00; }
+            50%  { color: #44ff44; }
+            66%  { color: #4488ff; }
+            83%  { color: #aa44ff; }
+            100% { color: #ff4444; }
+        }
+
+        .featured-eyebrow-pro:hover {
+            animation: rainbow 1s linear infinite;
+        }
+
         .featured-title {
             font-size: 2.2rem;
             font-weight: 700;
@@ -903,7 +917,7 @@
     <section class="featured-product">
         <div class="featured-stack">
             <div class="featured-card">
-                <div class="featured-eyebrow">Pro</div>
+                <div class="featured-eyebrow featured-eyebrow-pro">Pro</div>
                 <h2 class="featured-title">Silic Case Pro</h2>
                 <p class="featured-price"><strong>$20</strong></p>
                 <p class="featured-description">RGB cooling fan, ultimate protection</p>
