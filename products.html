@@ -677,19 +677,22 @@
         function scrollToVariants(event) {
             event.stopPropagation();
             const section = document.getElementById('iphone-cases');
-            section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            const sectionTop = section.getBoundingClientRect().top + window.scrollY;
+            window.scrollTo({ top: sectionTop - 120, behavior: 'smooth' });
         }
 
         function scrollToWatchCases(event) {
             event.stopPropagation();
             const section = document.getElementById('watch-cases');
-            section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            const sectionTop = section.getBoundingClientRect().top + window.scrollY;
+            window.scrollTo({ top: sectionTop - 120, behavior: 'smooth' });
         }
 
         function scrollToFidgets(event) {
             event.stopPropagation();
             const section = document.getElementById('fidgets');
-            section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            const sectionTop = section.getBoundingClientRect().top + window.scrollY;
+            window.scrollTo({ top: sectionTop - 120, behavior: 'smooth' });
         }
 
         const edgeTimers = new WeakMap();
