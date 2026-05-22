@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team — Silic</title>
+    <meta name="description" content="Meet the Silic team: 5 young creators passionate about 3D printing and making cool things.">
+    <meta property="og:title" content="Team — Silic">
+    <meta property="og:description" content="Meet the young makers behind Silic.">
+    <meta property="og:type" content="website">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #07070f;
+            --text: #f0f0f5;
+            --muted: #8a8a9a;
+            --accent: #ff6b35;
+            --glass: rgba(255, 255, 255, 0.08);
+            --glass-border: rgba(255, 255, 255, 0.18);
+            --glass-hover: rgba(255, 255, 255, 0.14);
+            --glow: rgba(200, 220, 255, 0.15);
+            --shine: rgba(255, 255, 255, 0.12);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Inter, 'Helvetica Neue', sans-serif;
+            color: var(--text);
+            background: var(--bg);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        .nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(60px);
+            -webkit-backdrop-filter: blur(60px);
+            background: rgba(7, 7, 15, 0.35);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+        }
+
+        .nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 24px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--accent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            opacity: 1;
+        }
+
+        .nav-links a.active::after {
+            opacity: 1;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Section */
+        .section {
+            padding: 96px 24px;
+        }
+
+        .eyebrow {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: rgba(255, 255, 255, 0.45);
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .section h2 {
+            font-size: 2.6rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+        }
+
+        .section-lead {
+            font-size: 1.15rem;
+            color: var(--muted);
+            margin-bottom: 48px;
+            max-width: 600px;
+        }
+
+        /* Team */
+        .team {
+            background: var(--bg);
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 32px;
+            margin-top: 48px;
+        }
+
+        .team-member {
+            text-align: center;
+        }
+
+        .team-avatar {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0.08) 100%);
+            border: 1.5px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(50px);
+            -webkit-backdrop-filter: blur(50px);
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 56px;
+            font-weight: 700;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            transform: translateZ(0);
+            position: relative;
+            overflow: hidden;
+            box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.15), inset 0 -2px 4px rgba(0, 0, 0, 0.2), 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        .team-avatar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.25) 50%, rgba(255, 255, 255, 0) 100%);
+            border-radius: inherit;
+        }
+
+        .team-member:hover .team-avatar {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0.16) 100%);
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.15), inset 0 -2px 4px rgba(0, 0, 0, 0.2), 0 25px 60px var(--glow);
+            transform: translateY(-4px);
+        }
+
+        .team-member h3 {
+            font-size: 1.2rem;
+            margin-bottom: 4px;
+        }
+
+        .team-member p {
+            font-size: 0.9rem;
+            color: var(--muted);
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(7, 7, 15, 0.8);
+            padding: 48px 24px;
+            text-align: center;
+            color: var(--muted);
+            font-size: 14px;
+            border-top: 1px solid var(--glass-border);
+        }
+
+        /* Responsive */
+        @media (max-width: 860px) {
+            .section h2 {
+                font-size: 1.8rem;
+            }
+
+            .nav-links {
+                gap: 14px;
+            }
+
+            .team-grid {
+                grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+                gap: 24px;
+            }
+
+            .section {
+                padding: 80px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="/" class="logo">Silic</a>
+            <ul class="nav-links">
+                <li><a href="/products">Products</a></li>
+                <li><a href="/team" class="active">Team</a></li>
+                <li><a href="/#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Team -->
+    <section class="team section">
+        <div class="container">
+            <div class="eyebrow">Our Crew</div>
+            <h2>5 Young Makers</h2>
+            <p class="section-lead">Silic is run by a team of young creators passionate about 3D printing and making cool things.</p>
+
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="team-avatar">I</div>
+                    <h3>Ish</h3>
+                    <p>CEO & Founder</p>
+                </div>
+                <div class="team-member">
+                    <div class="team-avatar">M</div>
+                    <h3>Max</h3>
+                    <p>Design Lead</p>
+                </div>
+                <div class="team-member">
+                    <div class="team-avatar">I</div>
+                    <h3>Irving</h3>
+                    <p>Production</p>
+                </div>
+                <div class="team-member">
+                    <div class="team-avatar">R</div>
+                    <h3>Rishan</h3>
+                    <p>Operations</p>
+                </div>
+                <div class="team-member">
+                    <div class="team-avatar">A</div>
+                    <h3>Aadi</h3>
+                    <p>Growth</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Silic. Made by young creators. Printed with ❤️ and shipped via UPS.</p>
+    </footer>
+</body>
+</html>
