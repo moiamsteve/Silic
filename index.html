@@ -8,9 +8,6 @@
     <meta property="og:title" content="Silic — 3D Printing by Young Makers">
     <meta property="og:description" content="We design, print, and ship 3D models. Made by a team of young creators.">
     <meta property="og:type" content="website">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Sacramento&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -817,33 +814,6 @@
             color: rgba(255, 255, 255, 0.2);
             margin: 0 10px;
         }
-
-        /* Loop Text Effect */
-        .loop-text {
-            position: relative;
-            display: inline-block;
-        }
-
-        .loop-normal {
-            display: block;
-        }
-
-        .loop-script {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            font-family: 'Sacramento', cursive;
-            font-size: 1.2em;
-            font-weight: 400;
-            letter-spacing: 0.05em;
-            opacity: 0;
-            transition: opacity 0.2s ease;
-        }
-
-        .loop-text .loop-script {
-            color: var(--text);
-        }
     </style>
 </head>
 <body>
@@ -862,7 +832,7 @@
     <!-- Hero -->
     <section class="hero">
         <div class="hero-content">
-            <h1><span class="loop-text"><span class="loop-normal">3D Printing Made by Young Creators</span><span class="loop-script">3D Printing Made by Young Creators</span></span></h1>
+            <h1>3D Printing Made by Young Creators</h1>
             <p>We design, print, and ship custom 3D models. Every piece is crafted with care and shipped fast.</p>
             <div class="hero-cta">
                 <a href="/products" class="btn btn-white">See What We Make</a>
@@ -876,12 +846,12 @@
         <div class="featured-stack">
             <div class="featured-card">
                 <div class="featured-eyebrow">Featured</div>
-                <h2 class="featured-title"><span class="loop-text"><span class="loop-normal">Silic Case <span class="flex-word"><span class="flex-letter">F</span><span class="flex-letter">l</span><span class="flex-letter">e</span><span class="flex-letter">x</span></span></span><span class="loop-script">Silic Case Flex</span></span></h2>
+                <h2 class="featured-title">Silic Case <span class="flex-word"><span class="flex-letter">F</span><span class="flex-letter">l</span><span class="flex-letter">e</span><span class="flex-letter">x</span></span></h2>
                 <p class="featured-price"><strong>$12</strong><span class="featured-price-divider">·</span><strong>$15</strong> custom</p>
             </div>
             <div class="featured-card">
                 <div class="featured-eyebrow">New</div>
-                <h2 class="featured-title"><span class="loop-text"><span class="loop-normal">Milanese Loop Silic Band</span><span class="loop-script">Milanese Loop Silic Band</span></span></h2>
+                <h2 class="featured-title">Milanese Loop Silic Band</h2>
                 <p class="featured-price"><strong>$6</strong></p>
             </div>
         </div>
@@ -900,22 +870,6 @@
     <footer>
         <p>&copy; 2026 Silic. Made by young creators. Printed with ❤️ and shipped via UPS.</p>
     </footer>
-
-    <!-- Scroll-based Text Transform -->
-    <script>
-        function updateLoopOpacity() {
-            const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
-            const scrollProgress = scrollHeight > 0 ? window.scrollY / scrollHeight : 0;
-
-            const loopScripts = document.querySelectorAll('.loop-script');
-            loopScripts.forEach(el => {
-                el.style.opacity = Math.min(scrollProgress * 2, 1);
-            });
-        }
-
-        window.addEventListener('scroll', updateLoopOpacity, { passive: true });
-        updateLoopOpacity();
-    </script>
 
     <!-- Analytics -->
     <script>
