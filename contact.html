@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact — Silic</title>
+    <meta name="description" content="Get in touch with Silic. Custom orders, bulk prints, or questions — we'd love to help.">
+    <meta property="og:title" content="Contact — Silic">
+    <meta property="og:description" content="Contact Silic for custom orders and inquiries.">
+    <meta property="og:type" content="website">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #07070f;
+            --text: #f0f0f5;
+            --muted: #8a8a9a;
+            --accent: #ff6b35;
+            --accent-dark: #e55a2b;
+            --glass: rgba(255, 255, 255, 0.08);
+            --glass-border: rgba(255, 255, 255, 0.18);
+            --glass-hover: rgba(255, 255, 255, 0.14);
+            --glow: rgba(200, 220, 255, 0.15);
+            --shine: rgba(255, 255, 255, 0.12);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Inter, 'Helvetica Neue', sans-serif;
+            color: var(--text);
+            background: var(--bg);
+            line-height: 1.6;
+            padding-top: 45px;
+        }
+
+        /* Spinning Banner */
+        @keyframes spin {
+            from { transform: rotateY(0deg); }
+            to { transform: rotateY(360deg); }
+        }
+
+        .spinning-banner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 200;
+            padding: 12px 24px;
+            text-align: center;
+            background: linear-gradient(90deg, rgba(255, 107, 53, 0.15), rgba(200, 220, 255, 0.1));
+            border-bottom: 1px solid rgba(255, 107, 53, 0.2);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+
+        .spinning-banner a {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            color: var(--text);
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .spinning-banner a:hover {
+            color: var(--accent);
+        }
+
+        .spin-icon {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            animation: spin 2s linear infinite;
+        }
+
+        /* Navigation */
+        .nav {
+            position: sticky;
+            top: 45px;
+            z-index: 100;
+            backdrop-filter: blur(60px);
+            -webkit-backdrop-filter: blur(60px);
+            background: rgba(7, 7, 15, 0.35);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+        }
+
+        .nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 24px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--accent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            opacity: 1;
+        }
+
+        .nav-links a.active::after {
+            opacity: 1;
+        }
+
+        /* Hero */
+        .hero {
+            background: radial-gradient(ellipse 900px 900px at 20% 50%, rgba(80, 120, 255, 0.06) 0%, transparent 40%),
+                        radial-gradient(ellipse 600px 600px at 80% -20%, rgba(120, 80, 255, 0.04) 0%, transparent 35%),
+                        var(--bg);
+            padding: 96px 24px 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: radial-gradient(circle, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .hero-content {
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3.6rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            letter-spacing: -0.025em;
+            color: var(--text);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--muted);
+            margin-bottom: 48px;
+            line-height: 1.6;
+        }
+
+        /* Contact Card */
+        .contact-card {
+            background: var(--glass);
+            border: 1.5px solid var(--glass-border);
+            backdrop-filter: blur(60px);
+            -webkit-backdrop-filter: blur(60px);
+            border-radius: 32px;
+            padding: 60px 48px;
+            max-width: 500px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+            box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.15), inset 0 -2px 4px rgba(0, 0, 0, 0.2), 0 25px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .contact-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.25) 50%, rgba(255, 255, 255, 0) 100%);
+            border-radius: inherit;
+        }
+
+        .contact-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 50%;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0) 100%);
+            pointer-events: none;
+        }
+
+        .contact-eyebrow {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: rgba(255, 255, 255, 0.45);
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .contact-card h2 {
+            font-size: 2.4rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            letter-spacing: -0.02em;
+        }
+
+        .contact-card p {
+            color: var(--muted);
+            margin-bottom: 36px;
+            font-size: 1.05rem;
+            line-height: 1.6;
+        }
+
+        .contact-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px 32px;
+            border-radius: 28px;
+            background: var(--accent);
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            transform: translateZ(0);
+        }
+
+        .contact-btn:hover {
+            background: var(--accent-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 20px 40px rgba(255, 107, 53, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(7, 7, 15, 0.8);
+            padding: 48px 24px;
+            text-align: center;
+            color: var(--muted);
+            font-size: 14px;
+            border-top: 1px solid var(--glass-border);
+            margin-top: 96px;
+        }
+
+        /* Responsive */
+        @media (max-width: 860px) {
+            .hero h1 {
+                font-size: 2.4rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .contact-card {
+                padding: 40px 32px;
+            }
+
+            .contact-card h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Spinning Banner -->
+    <div class="spinning-banner">
+        <a href="https://www.gofundme.com/f/support-ishs-team-in-launching-their-3d-printing-business/stream-goal-bar?locale=en-US&utm_campaign=fp_sharesheet&utm_medium=customer&utm_source=streaming_widget&attribution_id=sl%3A86fb00ba-1f4b-4df0-8e87-021a6a944eb9" target="_blank">
+            <span class="spin-icon">🎁</span>
+            Support Silic on GoFundMe — Help us grow!
+        </a>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="/" class="logo">Silic</a>
+            <ul class="nav-links">
+                <li><a href="/products">Products</a></li>
+                <li><a href="/team">Team</a></li>
+                <li><a href="/contact" class="active">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Get in Touch</h1>
+            <p>Custom orders, bulk prints, or just a question — we'd love to hear from you.</p>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section style="padding: 96px 24px;">
+        <div class="contact-card">
+            <div class="contact-eyebrow">Contact Us</div>
+            <h2>Let's Make Something Great</h2>
+            <p>Send us an email with your ideas, questions, or orders. We'll get back to you within 24 hours.</p>
+            <a href="mailto:ish.s.singh@outlook.com" class="contact-btn">Send Email</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Silic. Made by young creators. Printed with ❤️ and shipped via UPS.</p>
+    </footer>
+
+    <!-- Analytics -->
+    <script>
+        (async () => {
+            const API = 'https://mhnvnh6pr6.execute-api.us-east-1.amazonaws.com';
+            const key = 'visitLogged:' + location.pathname;
+            if (sessionStorage.getItem(key)) return;
+            sessionStorage.setItem(key, '1');
+            try {
+                const { ip } = await (await fetch('https://api.ipify.org?format=json')).json();
+                await fetch(API + '/log-access', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        ip,
+                        success: true,
+                        userAgent: navigator.userAgent + ' | path=' + location.pathname
+                    })
+                });
+            } catch (_) { /* analytics best-effort */ }
+        })();
+    </script>
+</body>
+</html>
