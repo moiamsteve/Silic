@@ -722,13 +722,19 @@
             card.style.setProperty('--ripple-y', y + 'px');
             card.style.setProperty('--ripple-radius', maxRadius + 'px');
 
+            card.querySelectorAll('.ripple-circle').forEach(c => c.remove());
+
             const circle = document.createElement('div');
             circle.classList.add('ripple-circle');
+            circle.style.left = (x - maxRadius) + 'px';
+            circle.style.top = (y - maxRadius) + 'px';
+            circle.style.width = (maxRadius * 2) + 'px';
+            circle.style.height = (maxRadius * 2) + 'px';
             card.appendChild(circle);
 
             circle.animate([
-                { left: x + 'px', top: y + 'px', width: '0px', height: '0px', opacity: 1, borderWidth: '2.5px' },
-                { left: (x - maxRadius) + 'px', top: (y - maxRadius) + 'px', width: (maxRadius * 2) + 'px', height: (maxRadius * 2) + 'px', opacity: 0, borderWidth: '1px' }
+                { transform: 'scale(0)', opacity: 1, borderWidth: '2.5px' },
+                { transform: 'scale(1)', opacity: 0, borderWidth: '1px' }
             ], { duration: 1400, easing: 'cubic-bezier(0.23, 1, 0.32, 1)' }).onfinish = () => circle.remove();
 
             card.classList.toggle('active');
