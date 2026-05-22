@@ -766,16 +766,29 @@
                 }
             });
 
-            const maxRadius = Math.max(
+            const overlayTop = 72;
+            const overlayY = y - overlayTop;
+            const overlayHeight = rect.height - overlayTop;
+
+            const rippleRadius = Math.max(
                 Math.sqrt(x * x + y * y),
                 Math.sqrt((rect.width - x) ** 2 + y * y),
                 Math.sqrt(x * x + (rect.height - y) ** 2),
                 Math.sqrt((rect.width - x) ** 2 + (rect.height - y) ** 2)
             ) + 10;
 
+            const clipRadius = Math.max(
+                Math.sqrt(x * x + overlayY * overlayY),
+                Math.sqrt((rect.width - x) ** 2 + overlayY * overlayY),
+                Math.sqrt(x * x + (overlayHeight - overlayY) ** 2),
+                Math.sqrt((rect.width - x) ** 2 + (overlayHeight - overlayY) ** 2)
+            ) + 10;
+
+            const maxRadius = rippleRadius;
+
             card.style.setProperty('--ripple-x', x + 'px');
-            card.style.setProperty('--ripple-y', y + 'px');
-            card.style.setProperty('--ripple-radius', maxRadius + 'px');
+            card.style.setProperty('--ripple-y', overlayY + 'px');
+            card.style.setProperty('--ripple-radius', clipRadius + 'px');
 
             card.querySelectorAll('.ripple-circle').forEach(c => c.remove());
 
