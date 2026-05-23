@@ -834,6 +834,29 @@
             margin: 0 10px;
         }
 
+        @keyframes writing {
+            0% {
+                opacity: 0;
+                letter-spacing: 0.5em;
+            }
+            100% {
+                opacity: 1;
+                letter-spacing: normal;
+            }
+        }
+
+        .milanese-word {
+            font-family: 'Brush Script MT', 'Lucida Handwriting', cursive;
+            font-style: italic;
+            font-weight: 600;
+            color: var(--accent);
+            display: inline-block;
+        }
+
+        .milanese-word:hover {
+            animation: writing 1.2s ease-in-out forwards;
+        }
+
         .hard-word {
             font-weight: 700;
             transition: font-weight 0s, letter-spacing 0.2s ease;
@@ -950,7 +973,7 @@
             </div>
             <div class="featured-card">
                 <div class="featured-eyebrow">New</div>
-                <h2 class="featured-title">Milanese Loop Silic Band</h2>
+                <h2 class="featured-title"><span class="milanese-word">Milanese</span> Loop Silic Band</h2>
                 <p class="featured-price"><strong>$8</strong></p>
             </div>
         </div>
