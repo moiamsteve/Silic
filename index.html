@@ -836,27 +836,25 @@
 
         @keyframes writing {
             0% {
-                background-position: 0% center;
+                opacity: 0;
+                letter-spacing: 0.5em;
             }
             100% {
-                background-position: 100% center;
+                opacity: 1;
+                letter-spacing: normal;
             }
         }
 
         .milanese-word {
+            font-family: 'Brush Script MT', 'Lucida Handwriting', cursive;
+            font-style: italic;
+            font-weight: 600;
             color: var(--accent);
             display: inline-block;
-            background: linear-gradient(90deg, var(--accent) 0%, var(--accent) 0%, transparent 0%, transparent 100%);
-            background-size: 200% 100%;
-            background-position: 0% center;
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
         }
 
         .milanese-word:hover {
-            animation: writing 1.5s ease-in-out forwards;
-            -webkit-text-fill-color: transparent;
+            animation: writing 1.2s ease-in-out forwards;
         }
 
         .hard-word {
