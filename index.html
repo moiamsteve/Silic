@@ -774,6 +774,19 @@
             animation: rainbow 3s linear infinite;
         }
 
+        .featured-title-link {
+            text-decoration: none;
+            display: block;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .featured-title-link:hover .featured-title {
+            text-decoration: underline;
+            text-decoration-thickness: 2px;
+            text-underline-offset: 6px;
+        }
+
         .featured-title {
             font-size: 2.2rem;
             font-weight: 700;
@@ -781,6 +794,7 @@
             letter-spacing: -0.02em;
             line-height: 1.15;
             color: var(--text);
+            transition: text-decoration 0.3s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
         .flex-word {
@@ -933,25 +947,25 @@
         <div class="featured-stack">
             <div class="featured-card">
                 <div class="featured-eyebrow">Pro</div>
-                <h2 class="featured-title">Silic Case <span class="pro-word">Pro</span></h2>
+                <a href="/silic-case-pro" class="featured-title-link"><h2 class="featured-title">Silic Case <span class="pro-word">Pro</span></h2></a>
                 <p class="featured-price"><strong>$20</strong></p>
                 <p class="featured-description">RGB cooling fan, ultimate protection</p>
             </div>
             <div class="featured-card">
                 <div class="featured-eyebrow">Featured</div>
-                <h2 class="featured-title">Silic Case <span class="flex-word"><span class="flex-letter">F</span><span class="flex-letter">l</span><span class="flex-letter">e</span><span class="flex-letter">x</span></span></h2>
+                <a href="/silic-case-flex" class="featured-title-link"><h2 class="featured-title">Silic Case <span class="flex-word"><span class="flex-letter">F</span><span class="flex-letter">l</span><span class="flex-letter">e</span><span class="flex-letter">x</span></span></h2></a>
                 <p class="featured-price"><strong>$12</strong><span class="featured-price-divider">·</span><strong>$15</strong> custom</p>
                 <p class="featured-description">bend, flex, well protect</p>
             </div>
             <div class="featured-card">
                 <div class="featured-eyebrow">Featured</div>
-                <h2 class="featured-title">Silic Case <span class="hard-word">Hard</span></h2>
+                <a href="/silic-case-hard" class="featured-title-link"><h2 class="featured-title">Silic Case <span class="hard-word">Hard</span></h2></a>
                 <p class="featured-price"><strong>$13</strong><span class="featured-price-divider">·</span><strong>$16</strong> custom</p>
                 <p class="featured-description">tougher cases for rougher places</p>
             </div>
             <div class="featured-card">
                 <div class="featured-eyebrow">New</div>
-                <h2 class="featured-title">Milanese Loop Silic Band</h2>
+                <a href="/milanese-loop-silic-band" class="featured-title-link"><h2 class="featured-title">Milanese Loop Silic Band</h2></a>
                 <p class="featured-price"><strong>$8</strong></p>
             </div>
         </div>
