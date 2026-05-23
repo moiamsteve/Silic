@@ -27,6 +27,8 @@
             --glass-hover: rgba(255, 255, 255, 0.14);
             --glow: rgba(200, 220, 255, 0.15);
             --shine: rgba(255, 255, 255, 0.12);
+            --light-x: 20%;
+            --light-y: 50%;
         }
 
         @keyframes rgb-shift {
@@ -115,13 +117,14 @@
 
         /* Hero */
         .hero {
-            background: radial-gradient(ellipse 900px 900px at 20% 50%, rgba(80, 120, 255, 0.06) 0%, transparent 40%),
+            background: radial-gradient(ellipse 900px 900px at var(--light-x) var(--light-y), rgba(80, 120, 255, 0.1) 0%, transparent 40%),
                         radial-gradient(ellipse 600px 600px at 80% -20%, rgba(120, 80, 255, 0.04) 0%, transparent 35%),
                         var(--bg);
             padding: 96px 24px 80px;
             text-align: center;
             position: relative;
             overflow: hidden;
+            transition: background 0.05s ease-out;
         }
 
         .hero::before {
@@ -966,6 +969,26 @@
     <footer>
         <p>&copy; 2026 Silic. Made by young creators. Printed with ❤️ and shipped via UPS.</p>
     </footer>
+
+    <!-- Pointer-tracking light effect -->
+    <script>
+        const hero = document.querySelector('.hero');
+        if (hero) {
+            hero.addEventListener('mousemove', (e) => {
+                const rect = hero.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const xPercent = (x / rect.width) * 100;
+                const yPercent = (y / rect.height) * 100;
+                hero.style.setProperty('--light-x', xPercent + '%');
+                hero.style.setProperty('--light-y', yPercent + '%');
+            });
+            hero.addEventListener('mouseleave', () => {
+                hero.style.setProperty('--light-x', '20%');
+                hero.style.setProperty('--light-y', '50%');
+            });
+        }
+    </script>
 
     <!-- Analytics -->
     <script>
