@@ -49,11 +49,11 @@
             position: sticky;
             top: 45px;
             z-index: 100;
-            backdrop-filter: blur(60px);
-            -webkit-backdrop-filter: blur(60px);
-            background: rgba(7, 7, 15, 0.35);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(40px);
+            -webkit-backdrop-filter: blur(40px);
+            background: rgba(7, 7, 15, 0.5);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 1px 0 rgba(255, 255, 255, 0.06);
         }
 
         .nav-inner {
@@ -185,6 +185,7 @@
         .btn-primary:hover {
             background: var(--accent-dark);
             transform: translateY(-2px);
+            box-shadow: 0 20px 40px rgba(255, 107, 53, 0.2);
         }
 
         .btn-white {
@@ -260,14 +261,14 @@
             padding: 40px 32px;
             border-radius: 24px;
             border: 1px solid var(--glass-border);
-            backdrop-filter: blur(50px);
-            -webkit-backdrop-filter: blur(50px);
+            backdrop-filter: blur(32px);
+            -webkit-backdrop-filter: blur(32px);
             text-align: center;
             transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
             transform: translateZ(0);
             position: relative;
             overflow: hidden;
-            box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.15), inset 0 -2px 4px rgba(0, 0, 0, 0.2), 0 25px 50px rgba(0, 0, 0, 0.25);
+            box-shadow: inset 0 1px 0 var(--shine), inset 0 -1px 0 rgba(0, 0, 0, 0.15), 0 25px 50px rgba(0, 0, 0, 0.25);
         }
 
         .process-card::after {
@@ -336,10 +337,10 @@
 
         .gallery-card {
             aspect-ratio: 1;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.06) 100%);
-            border: 1.5px solid rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(50px);
-            -webkit-backdrop-filter: blur(50px);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.04) 100%);
+            border: 1.5px solid rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(32px);
+            -webkit-backdrop-filter: blur(32px);
             border-radius: 24px;
             display: flex;
             align-items: center;
@@ -354,7 +355,7 @@
             transform: translateZ(0);
             position: relative;
             overflow: hidden;
-            box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.15), inset 0 -2px 4px rgba(0, 0, 0, 0.2), 0 20px 40px rgba(0, 0, 0, 0.2);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), inset 0 -1px 0 rgba(0, 0, 0, 0.1), 0 20px 40px rgba(0, 0, 0, 0.2);
         }
 
         .gallery-card::after {
@@ -455,8 +456,8 @@
         .product-category-card {
             background: var(--glass);
             border: 1.5px solid var(--glass-border);
-            backdrop-filter: blur(50px);
-            -webkit-backdrop-filter: blur(50px);
+            backdrop-filter: blur(32px);
+            -webkit-backdrop-filter: blur(32px);
             border-radius: 24px;
             padding: 32px 24px;
             text-align: center;
@@ -465,7 +466,7 @@
             cursor: pointer;
             position: relative;
             overflow: hidden;
-            box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.15), inset 0 -2px 4px rgba(0, 0, 0, 0.2), 0 25px 50px rgba(0, 0, 0, 0.25);
+            box-shadow: inset 0 1px 0 var(--shine), inset 0 -1px 0 rgba(0, 0, 0, 0.15), 0 25px 50px rgba(0, 0, 0, 0.25);
         }
 
         .product-category-card::after {
@@ -536,15 +537,15 @@
         .case-card {
             background: var(--glass);
             border: 1.5px solid var(--glass-border);
-            backdrop-filter: blur(50px);
-            -webkit-backdrop-filter: blur(50px);
+            backdrop-filter: blur(32px);
+            -webkit-backdrop-filter: blur(32px);
             border-radius: 20px;
             padding: 24px;
             transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
             transform: translateZ(0);
             position: relative;
             overflow: hidden;
-            box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.15), inset 0 -2px 4px rgba(0, 0, 0, 0.2), 0 20px 40px rgba(0, 0, 0, 0.2);
+            box-shadow: inset 0 1px 0 var(--shine), inset 0 -1px 0 rgba(0, 0, 0, 0.15), 0 20px 40px rgba(0, 0, 0, 0.2);
         }
 
         .case-card::after {
@@ -727,13 +728,13 @@
         .featured-card {
             background: var(--glass);
             border: 1.5px solid var(--glass-border);
-            backdrop-filter: blur(50px);
-            -webkit-backdrop-filter: blur(50px);
+            backdrop-filter: blur(32px);
+            -webkit-backdrop-filter: blur(32px);
             border-radius: 24px;
             padding: 40px 32px;
             position: relative;
             overflow: hidden;
-            box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.15), inset 0 -2px 4px rgba(0, 0, 0, 0.2), 0 25px 50px rgba(0, 0, 0, 0.25);
+            box-shadow: inset 0 1px 0 var(--shine), inset 0 -1px 0 rgba(0, 0, 0, 0.15), 0 25px 50px rgba(0, 0, 0, 0.25);
         }
 
         .featured-card::after {
@@ -861,8 +862,8 @@
             z-index: 200;
             padding: 12px 24px;
             text-align: center;
-            background: linear-gradient(90deg, rgba(255, 107, 53, 0.15), rgba(200, 220, 255, 0.1));
-            border-bottom: 1px solid rgba(255, 107, 53, 0.2);
+            background: linear-gradient(90deg, rgba(200, 220, 255, 0.08), rgba(200, 220, 255, 0.05));
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
         }
