@@ -9,16 +9,16 @@ frontend:
       - '**/*'
   cache:
     paths: []
-  routing:
-    - source: '/products'
-      target: '/products.html'
+  customRules:
+    - source: /products
+      target: /products.html
       status: '200'
-    - source: '/team'
-      target: '/team.html'
+    - source: /team
+      target: /team.html
       status: '200'
-    - source: '/contact'
-      target: '/contact.html'
+    - source: /contact
+      target: /contact.html
       status: '200'
-    - source: '</^[^.]+$|\.(?!.*\.)>'
-      target: '/index.html'
+    - source: </^[^.]+$|\.(?!.*\.)>
+      target: /index.html
       status: '200'
