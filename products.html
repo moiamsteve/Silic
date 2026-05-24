@@ -580,10 +580,10 @@
             <div id="fidgets" style="margin-top: 48px;">
                 <h3 style="margin-bottom: 24px; font-size: 1.4rem; color: var(--text);">Fidget Collection</h3>
                 <div class="case-grid">
-                    <div class="case-card fidget-card" data-href="/cone-spiral-fidget">
+                    <div class="case-card fidget-card" data-href="/cone-spiral-fidget" onclick="toggleCardWithRipple(event, 'green', false)">
                         <div class="case-content">
                             <div class="case-header">
-                                <h3 onclick="toggleCardWithRipple(event, 'green', true)">Cone Spiral Fidget</h3>
+                                <h3 onclick="event.stopPropagation(); window.location.href = this.closest('.case-card').dataset.href;">Cone Spiral Fidget</h3>
                                 <div class="case-badges">
                                     <span class="badge badge-custom">16 Combinations</span>
                                 </div>
@@ -596,10 +596,10 @@
                         </div>
                     </div>
 
-                    <div class="case-card fidget-card" data-href="/fidget-snake">
+                    <div class="case-card fidget-card" data-href="/fidget-snake" onclick="toggleCardWithRipple(event, 'green', false)">
                         <div class="case-content">
                             <div class="case-header">
-                                <h3 onclick="toggleCardWithRipple(event, 'green', true)">Fidget Snake</h3>
+                                <h3 onclick="event.stopPropagation(); window.location.href = this.closest('.case-card').dataset.href;">Fidget Snake</h3>
                                 <div class="case-badges">
                                     <span class="badge badge-flex">Flexible</span>
                                 </div>
@@ -617,10 +617,10 @@
             <div id="iphone-cases" style="margin-top: 48px;">
                 <h3 style="margin-bottom: 24px; font-size: 1.4rem; color: var(--text);">iPhone Case Variants</h3>
                 <div class="case-grid">
-                    <div class="case-card" data-href="/iphone-tpu-flex">
+                    <div class="case-card" data-href="/iphone-tpu-flex" onclick="toggleCardWithRipple(event, null, false)">
                         <div class="case-content">
                             <div class="case-header">
-                                <h3 onclick="toggleCardWithRipple(event, null, true)">TPU Flex</h3>
+                                <h3 onclick="event.stopPropagation(); window.location.href = this.closest('.case-card').dataset.href;">TPU Flex</h3>
                                 <div class="case-badges">
                                     <span class="badge badge-flex">Flexible</span>
                                 </div>
@@ -633,10 +633,10 @@
                         </div>
                     </div>
 
-                    <div class="case-card" data-href="/iphone-hard-case">
+                    <div class="case-card" data-href="/iphone-hard-case" onclick="toggleCardWithRipple(event, null, false)">
                         <div class="case-content">
                             <div class="case-header">
-                                <h3 onclick="toggleCardWithRipple(event, null, true)">Hard Case</h3>
+                                <h3 onclick="event.stopPropagation(); window.location.href = this.closest('.case-card').dataset.href;">Hard Case</h3>
                                 <div class="case-badges">
                                     <span class="badge badge-hard">Hard Shell</span>
                                 </div>
@@ -649,10 +649,10 @@
                         </div>
                     </div>
 
-                    <div class="case-card" data-href="/custom-case">
+                    <div class="case-card" data-href="/custom-case" onclick="toggleCardWithRipple(event, null, false)">
                         <div class="case-content">
                             <div class="case-header">
-                                <h3 onclick="toggleCardWithRipple(event, null, true)">Custom Case</h3>
+                                <h3 onclick="event.stopPropagation(); window.location.href = this.closest('.case-card').dataset.href;">Custom Case</h3>
                                 <div class="case-badges">
                                     <span class="badge badge-custom">Custom · Blaire</span>
                                 </div>
@@ -664,10 +664,10 @@
                         </div>
                     </div>
 
-                    <div class="case-card" data-href="/iphone-case-pro">
+                    <div class="case-card" data-href="/iphone-case-pro" onclick="toggleCardWithRipple(event, null, false)">
                         <div class="case-content">
                             <div class="case-header">
-                                <h3 onclick="toggleCardWithRipple(event, null, true)">Case Pro</h3>
+                                <h3 onclick="event.stopPropagation(); window.location.href = this.closest('.case-card').dataset.href;">Case Pro</h3>
                                 <div class="case-badges">
                                     <span class="badge badge-rgb">RGB</span>
                                     <span class="badge badge-hard">Hard Shell</span>
@@ -695,10 +695,10 @@
             <div id="watch-cases" style="margin-top: 48px;">
                 <h3 style="margin-bottom: 24px; font-size: 1.4rem; color: var(--text);">Watch Case Options</h3>
                 <div class="case-grid">
-                    <div class="case-card watch-card" data-href="/watch-tpu-flex">
+                    <div class="case-card watch-card" data-href="/watch-tpu-flex" onclick="toggleCardWithRipple(event, 'white', false)">
                         <div class="case-content">
                             <div class="case-header">
-                                <h3 onclick="toggleCardWithRipple(event, 'white', true)">TPU Flex</h3>
+                                <h3 onclick="event.stopPropagation(); window.location.href = this.closest('.case-card').dataset.href;">TPU Flex</h3>
                                 <div class="case-badges">
                                     <span class="badge badge-flex">Flexible</span>
                                 </div>
@@ -710,10 +710,10 @@
                         </div>
                     </div>
 
-                    <div class="case-card watch-card" data-href="/watch-hard-case">
+                    <div class="case-card watch-card" data-href="/watch-hard-case" onclick="toggleCardWithRipple(event, 'white', false)">
                         <div class="case-content">
                             <div class="case-header">
-                                <h3 onclick="toggleCardWithRipple(event, 'white', true)">Hard Case</h3>
+                                <h3 onclick="event.stopPropagation(); window.location.href = this.closest('.case-card').dataset.href;">Hard Case</h3>
                                 <div class="case-badges">
                                     <span class="badge badge-hard">Hard Shell</span>
                                 </div>
