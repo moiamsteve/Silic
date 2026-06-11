@@ -19,6 +19,9 @@ frontend:
     - source: /contact
       target: /contact.html
       status: '200'
+    - source: /sponsors
+      target: /sponsors.html
+      status: '200'
     - source: /silic-case-pro
       target: /silic-case-pro.html
       status: '200'

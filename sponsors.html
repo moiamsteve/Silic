@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sponsors — Silic</title>
+    <meta name="description" content="Our sponsors who make Silic possible. Thank you to our Gold, Silver, and Bronze supporters.">
+    <meta property="og:title" content="Sponsors — Silic">
+    <meta property="og:description" content="Thank you to our amazing sponsors.">
+    <meta property="og:type" content="website">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #07070f;
+            --text: #f0f0f5;
+            --muted: #8a8a9a;
+            --accent: #ff6b35;
+            --accent-dark: #e55a2b;
+            --gold: #ffd700;
+            --gold-dim: #b8a000;
+            --silver: #c0c0c0;
+            --silver-dim: #8a8a8a;
+            --bronze: #cd7f32;
+            --bronze-dim: #8b5a1f;
+            --glass: rgba(255, 255, 255, 0.08);
+            --glass-border: rgba(255, 255, 255, 0.18);
+            --glow: rgba(200, 220, 255, 0.15);
+            --shine: rgba(255, 255, 255, 0.12);
+        }
+
+        @keyframes spin {
+            from { transform: rotateY(0deg); }
+            to { transform: rotateY(360deg); }
+        }
+
+        @keyframes shimmer-gold {
+            0%, 100% { box-shadow: inset 0 1px 0 rgba(255, 215, 0, 0.3), inset 0 -1px 0 rgba(0, 0, 0, 0.2), 0 25px 60px rgba(255, 215, 0, 0.15); }
+            50% { box-shadow: inset 0 1px 0 rgba(255, 215, 0, 0.5), inset 0 -1px 0 rgba(0, 0, 0, 0.2), 0 35px 80px rgba(255, 215, 0, 0.25); }
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Inter, 'Helvetica Neue', sans-serif;
+            color: var(--text);
+            background: var(--bg);
+            line-height: 1.6;
+            padding-top: 45px;
+        }
+
+        .spinning-banner {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 200;
+            padding: 12px 24px;
+            text-align: center;
+            background: linear-gradient(90deg, rgba(200, 220, 255, 0.08), rgba(200, 220, 255, 0.05));
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+
+        .spinning-banner a {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            color: var(--text);
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .spinning-banner a:hover {
+            color: var(--accent);
+        }
+
+        .spin-icon {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            animation: spin 2s linear infinite;
+        }
+
+        .nav {
+            position: sticky;
+            top: 45px;
+            z-index: 100;
+            backdrop-filter: blur(40px);
+            -webkit-backdrop-filter: blur(40px);
+            background: rgba(7, 7, 15, 0.5);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 1px 0 rgba(255, 255, 255, 0.06);
+        }
+
+        .nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 24px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--accent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .nav-links a:hover::after, .nav-links a.active::after {
+            opacity: 1;
+        }
+
+        .hero {
+            background: radial-gradient(ellipse 900px 900px at 20% 50%, rgba(80, 120, 255, 0.06) 0%, transparent 40%),
+                        radial-gradient(ellipse 600px 600px at 80% -20%, rgba(120, 80, 255, 0.04) 0%, transparent 35%),
+                        var(--bg);
+            padding: 96px 24px 64px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: radial-gradient(circle, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .hero-content {
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3.6rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            letter-spacing: -0.025em;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--muted);
+        }
+
+        .sponsors-section {
+            padding: 64px 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .tier-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .tier-eyebrow {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .tier-eyebrow.gold { color: var(--gold); }
+        .tier-eyebrow.silver { color: var(--silver); }
+        .tier-eyebrow.bronze { color: var(--bronze); }
+
+        .tier-title {
+            font-size: 2.4rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 8px;
+        }
+
+        .tier-subtitle {
+            color: var(--muted);
+            font-size: 1.05rem;
+        }
+
+        .sponsor-grid {
+            display: grid;
+            gap: 24px;
+            margin-bottom: 80px;
+        }
+
+        .sponsor-grid.gold-grid {
+            grid-template-columns: 1fr;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 80px;
+        }
+
+        .sponsor-grid.silver-grid {
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        }
+
+        .sponsor-grid.bronze-grid {
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        }
+
+        .sponsor-card {
+            background: var(--glass);
+            border: 1.5px solid var(--glass-border);
+            backdrop-filter: blur(32px);
+            -webkit-backdrop-filter: blur(32px);
+            border-radius: 24px;
+            padding: 40px 32px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            transform: translateZ(0);
+            box-shadow: inset 0 1px 0 var(--shine), inset 0 -1px 0 rgba(0, 0, 0, 0.15), 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .sponsor-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.25) 50%, rgba(255, 255, 255, 0) 100%);
+            border-radius: inherit;
+        }
+
+        .sponsor-card.gold {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.08), rgba(255, 215, 0, 0.03));
+            border-color: rgba(255, 215, 0, 0.35);
+            padding: 56px 40px;
+            animation: shimmer-gold 4s ease-in-out infinite;
+        }
+
+        .sponsor-card.gold::after {
+            background: linear-gradient(90deg, rgba(255, 215, 0, 0) 0%, rgba(255, 215, 0, 0.6) 50%, rgba(255, 215, 0, 0) 100%);
+        }
+
+        .sponsor-card.silver {
+            background: linear-gradient(135deg, rgba(192, 192, 192, 0.07), rgba(192, 192, 192, 0.03));
+            border-color: rgba(192, 192, 192, 0.3);
+        }
+
+        .sponsor-card.silver::after {
+            background: linear-gradient(90deg, rgba(192, 192, 192, 0) 0%, rgba(192, 192, 192, 0.45) 50%, rgba(192, 192, 192, 0) 100%);
+        }
+
+        .sponsor-card.bronze {
+            background: linear-gradient(135deg, rgba(205, 127, 50, 0.07), rgba(205, 127, 50, 0.03));
+            border-color: rgba(205, 127, 50, 0.3);
+        }
+
+        .sponsor-card.bronze::after {
+            background: linear-gradient(90deg, rgba(205, 127, 50, 0) 0%, rgba(205, 127, 50, 0.45) 50%, rgba(205, 127, 50, 0) 100%);
+        }
+
+        .sponsor-card:hover {
+            transform: translateY(-6px);
+        }
+
+        .sponsor-card.gold:hover {
+            border-color: var(--gold);
+            box-shadow: inset 0 1px 0 rgba(255, 215, 0, 0.6), inset 0 -1px 0 rgba(0, 0, 0, 0.2), 0 0 0 2px rgba(255, 215, 0, 0.4), 0 30px 70px rgba(255, 215, 0, 0.3);
+        }
+
+        .sponsor-card.silver:hover {
+            border-color: var(--silver);
+            box-shadow: inset 0 1px 0 rgba(192, 192, 192, 0.5), inset 0 -1px 0 rgba(0, 0, 0, 0.2), 0 0 0 2px rgba(192, 192, 192, 0.4), 0 30px 70px rgba(192, 192, 192, 0.25);
+        }
+
+        .sponsor-card.bronze:hover {
+            border-color: var(--bronze);
+            box-shadow: inset 0 1px 0 rgba(205, 127, 50, 0.5), inset 0 -1px 0 rgba(0, 0, 0, 0.2), 0 0 0 2px rgba(205, 127, 50, 0.4), 0 30px 70px rgba(205, 127, 50, 0.25);
+        }
+
+        .empty-tier {
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .gold-grid .empty-tier:hover {
+            border-color: var(--gold);
+            box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.3), 0 20px 50px rgba(255, 215, 0, 0.15);
+            color: var(--text);
+        }
+
+        .silver-grid .empty-tier:hover {
+            border-color: var(--silver);
+            box-shadow: 0 0 0 2px rgba(192, 192, 192, 0.3), 0 20px 50px rgba(192, 192, 192, 0.12);
+            color: var(--text);
+        }
+
+        .bronze-grid .empty-tier:hover {
+            border-color: var(--bronze);
+            box-shadow: 0 0 0 2px rgba(205, 127, 50, 0.3), 0 20px 50px rgba(205, 127, 50, 0.12);
+            color: var(--text);
+        }
+
+        .sponsor-medal {
+            font-size: 3.5rem;
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .sponsor-card.gold .sponsor-medal { font-size: 4.5rem; }
+
+        .sponsor-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            letter-spacing: -0.01em;
+        }
+
+        .sponsor-card.gold .sponsor-name {
+            font-size: 2rem;
+            background: linear-gradient(135deg, #ffd700, #ffb700);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .sponsor-card.silver .sponsor-name {
+            background: linear-gradient(135deg, #e8e8e8, #b0b0b0);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .sponsor-card.bronze .sponsor-name {
+            background: linear-gradient(135deg, #e08540, #a96425);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .sponsor-description {
+            color: var(--muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .empty-tier {
+            text-align: center;
+            padding: 40px;
+            color: var(--muted);
+            font-style: italic;
+            background: var(--glass);
+            border: 1.5px dashed var(--glass-border);
+            border-radius: 24px;
+            grid-column: 1 / -1;
+        }
+
+        .cta-band {
+            background: linear-gradient(180deg, rgba(200, 220, 255, 0.05) 0%, rgba(200, 220, 255, 0.02) 100%);
+            border-top: 2px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+            padding: 80px 24px;
+            text-align: center;
+        }
+
+        .cta-band h2 {
+            font-size: 2.2rem;
+            margin-bottom: 16px;
+        }
+
+        .cta-band p {
+            font-size: 1.1rem;
+            color: var(--muted);
+            margin-bottom: 32px;
+        }
+
+        .btn {
+            padding: 14px 32px;
+            border-radius: 28px;
+            border: none;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 20px 40px rgba(255, 107, 53, 0.2);
+        }
+
+        footer {
+            background: rgba(7, 7, 15, 0.8);
+            padding: 48px 24px;
+            text-align: center;
+            color: var(--muted);
+            font-size: 14px;
+            border-top: 1px solid var(--glass-border);
+        }
+
+        @media (max-width: 860px) {
+            .hero h1 { font-size: 2.4rem; }
+            .tier-title { font-size: 1.8rem; }
+            .sponsor-card.gold { padding: 40px 28px; }
+            .sponsor-card.gold .sponsor-name { font-size: 1.6rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="spinning-banner">
+        <a href="https://www.gofundme.com/f/support-ishs-team-in-launching-their-3d-printing-business" target="_blank">
+            <span class="spin-icon">🎁</span>
+            Support Silic on GoFundMe — Help us grow!
+        </a>
+    </div>
+
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="/" class="logo">Silic</a>
+            <ul class="nav-links">
+                <li><a href="/products">Products</a></li>
+                <li><a href="/team">Team</a></li>
+                <li><a href="/sponsors" class="active">Sponsors</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Our Sponsors</h1>
+            <p>The amazing people and organizations who help make Silic possible. Thank you for believing in young creators.</p>
+        </div>
+    </section>
+
+    <section class="sponsors-section">
+        <!-- Gold Tier -->
+        <div class="tier-header">
+            <div class="tier-eyebrow gold">★ Gold Tier ★</div>
+            <h2 class="tier-title">Gold Sponsors</h2>
+            <p class="tier-subtitle">Our most generous supporters</p>
+        </div>
+        <div class="sponsor-grid gold-grid">
+            <div class="empty-tier">Become our first Gold Sponsor — <a href="/contact" style="color: var(--gold);">Get in touch</a></div>
+        </div>
+
+        <!-- Silver Tier -->
+        <div class="tier-header">
+            <div class="tier-eyebrow silver">★ Silver Tier ★</div>
+            <h2 class="tier-title">Silver Sponsors</h2>
+            <p class="tier-subtitle">Helping us grow and create</p>
+        </div>
+        <div class="sponsor-grid silver-grid">
+            <div class="empty-tier">Become a Silver Sponsor — <a href="/contact" style="color: var(--silver);">Get in touch</a></div>
+        </div>
+
+        <!-- Bronze Tier -->
+        <div class="tier-header">
+            <div class="tier-eyebrow bronze">★ Bronze Tier ★</div>
+            <h2 class="tier-title">Bronze Sponsors</h2>
+            <p class="tier-subtitle">Every contribution matters</p>
+        </div>
+        <div class="sponsor-grid bronze-grid">
+            <div class="empty-tier">Become a Bronze Sponsor — <a href="/contact" style="color: var(--bronze);">Get in touch</a></div>
+        </div>
+    </section>
+
+    <section class="cta-band">
+        <h2>Want to become a sponsor?</h2>
+        <p>Help us grow our 3D printing business and support young creators.</p>
+        <a href="/contact" class="btn btn-primary">Become a Sponsor</a>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Silic. Made by young creators. Printed with ❤️ and shipped via UPS.</p>
+    </footer>
+
+    <script src="/analytics.js"></script>
+</body>
+</html>
