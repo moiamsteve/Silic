@@ -19,6 +19,42 @@ frontend:
     - source: /contact
       target: /contact.html
       status: '200'
+    - source: /silic-case-pro
+      target: /silic-case-pro.html
+      status: '200'
+    - source: /silic-case-flex
+      target: /silic-case-flex.html
+      status: '200'
+    - source: /silic-case-hard
+      target: /silic-case-hard.html
+      status: '200'
+    - source: /milanese-loop-silic-band
+      target: /milanese-loop-silic-band.html
+      status: '200'
+    - source: /cone-spiral-fidget
+      target: /cone-spiral-fidget.html
+      status: '200'
+    - source: /fidget-snake
+      target: /fidget-snake.html
+      status: '200'
+    - source: /iphone-tpu-flex
+      target: /iphone-tpu-flex.html
+      status: '200'
+    - source: /iphone-hard-case
+      target: /iphone-hard-case.html
+      status: '200'
+    - source: /iphone-case-pro
+      target: /iphone-case-pro.html
+      status: '200'
+    - source: /custom-case
+      target: /custom-case.html
+      status: '200'
+    - source: /watch-tpu-flex
+      target: /watch-tpu-flex.html
+      status: '200'
+    - source: /watch-hard-case
+      target: /watch-hard-case.html
+      status: '200'
     - source: </^[^.]+$|\.(?!.*\.)>
       target: /index.html
       status: '200'
