@@ -64,11 +64,11 @@ frontend:
     - source: /cone-spiral-fidget/
       target: /cone-spiral-fidget.html
       status: '200'
-    - source: /fidget-snake
-      target: /fidget-snake.html
+    - source: /fidget-ball
+      target: /fidget-ball.html
       status: '200'
-    - source: /fidget-snake/
-      target: /fidget-snake.html
+    - source: /fidget-ball/
+      target: /fidget-ball.html
       status: '200'
     - source: /iphone-tpu-flex
       target: /iphone-tpu-flex.html
